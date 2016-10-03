@@ -70,16 +70,5 @@ public class CustomerTest {
      Timestamp rightNow = new Timestamp(new Date().getTime());
      assertEquals(rightNow.getDay(), savedCustomerOrderTime.getDay());
     }
-    // @Test
-    // public void getCustomers_retrievesAllCustomersFromDatabase_monstersList() {
-    //   Customer testCustomer = new Customer("Henry", "503-123-4567");
-    //   testCustomer.save();
-    //   FireCustomer firstCustomer = new FireCustomer("Smokey", testCustomer.getId());
-    //   firstCustomer.save();
-    //   WaterCustomer secondCustomer = new WaterCustomer("Drippy", testCustomer.getId());
-    //   secondCustomer.save();
-    //   Object[] monsters = new Object[] {firstCustomer, secondCustomer };
-    //   assertTrue(testCustomer.getCustomers().containsAll(Arrays.asList(monsters)));
-    // }
 
 }
