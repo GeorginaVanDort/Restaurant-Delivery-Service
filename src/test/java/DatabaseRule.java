@@ -5,15 +5,16 @@ public class DatabaseRule extends ExternalResource {
 
   @Override
   protected void before() {
-    DB.sql2o = new Sql2o("jdbc:postgresql://localhost:5432/food_delivery", null, null);
-  }
+  DB.sql2o = new Sql2o("jdbc:postgresql://localhost:5432/food_delivery", null, null);
+
 
   @Override
   protected void after() {
     try(Connection con = DB.sql2o.open()) {
       String deleteMenuItemsQuery = "DELETE FROM menuitems *;";
+      String deleteCustomersQuery = "DELETE FROM customers *;";
       con.createQuery(deleteMenuItemsQuery).executeUpdate();
+      con.createQuery(deleteCustomersQuery).executeUpdate();
     }
   }
-
 }
