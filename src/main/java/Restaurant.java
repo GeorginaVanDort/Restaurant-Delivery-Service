@@ -10,12 +10,13 @@ public class Restaurant {
   public String price;
   public int id;
 
-  public Restaurant(String name, String cuisine, String hours, String address, String price) {
+  public Restaurant (String name, String cuisine, String hours, String address, String price) {
     this.name = name;
     this.cuisine = cuisine;
     this.hours = hours;
     this.address = address;
     this.price = price;
+    this.save();
   }
 
   public String getName() {
@@ -54,7 +55,7 @@ public class Restaurant {
 
   public void save() {
     try(Connection con = DB.sql2o.open()) {
-      String sql = "INSERT INTO restaurants (name, cuisine, hours, address, price) VALUES (:name, :cuisne, :horus, :address, : price)";
+      String sql = "INSERT INTO restaurant (name, cuisine, hours, address, price) VALUES (:name, :cuisine, :hours, :address, :price)";
       this.id = (int) con.createQuery(sql, true)
         .addParameter("name", this.name)
         .addParameter("cuisine", this.cuisine)
@@ -67,15 +68,17 @@ public class Restaurant {
   }
 
   public static List<Restaurant> all() {
-    String sql = "SELECT id, name, cuisine, hours, address, price FROM restaurants";
+    String sql = "SELECT * FROM restaurant;";
     try(Connection con = DB.sql2o.open()) {
-      return con.createQuery(sql).executeAndFetch(Restaurant.class);
+      return con.createQuery(sql)
+      .throwOnMappingFailure(false)
+      .executeAndFetch(Restaurant.class);
     }
   }
 
   public static Restaurant find(int id) {
     try(Connection con = DB.sql2o.open()) {
-      String sql = "SELECT * FROM restaurants where id=:id";
+      String sql = "SELECT * FROM restaurant where id=:id";
       Restaurant restaurant = con.createQuery(sql)
         .addParameter("id", id)
         .executeAndFetchFirst(Restaurant.class);

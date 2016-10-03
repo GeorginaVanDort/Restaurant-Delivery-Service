@@ -17,9 +17,9 @@ public class CustomerTest {
     assertEquals(true, testCustomer instanceof Customer);
   }
   @Test
-  public void getName_customerInstantiatesWithName_Henry() {
+  public void getCustomerName_customerInstantiatesWithName_Henry() {
   Customer testCustomer = new Customer("Henry", "503-123-4567");
-  assertEquals("Henry", testCustomer.getName());
+  assertEquals("Henry", testCustomer.getCustomerName());
   }
   @Test
   public void getPhone_customerInstantiatesWithPhone_String() {
@@ -62,13 +62,13 @@ public class CustomerTest {
       secondCustomer.save();
       assertEquals(Customer.find(secondCustomer.getId()), secondCustomer);
     }
-    @Test
-    public void saveOrderTime_recordsOrderTimeOfCreationInDatabase() {
-     Customer testCustomer = new Customer("Henry", "503-123-4567");
-     testCustomer.save();
-     Timestamp savedCustomerOrderTime = Customer.find(testCustomer.getId()).getOrderTime();
-     Timestamp rightNow = new Timestamp(new Date().getTime());
-     assertEquals(rightNow.getDay(), savedCustomerOrderTime.getDay());
-    }
+    // @Test
+    // public void saveOrderTime_recordsOrderTimeOfCreationInDatabase() {
+    //  Customer testCustomer = new Customer("Henry", "503-123-4567");
+    //  testCustomer.save();
+    //  Timestamp savedCustomerOrderTime = Customer.find(testCustomer.getId()).getOrderTime();
+    //  Timestamp rightNow = new Timestamp(new Date().getTime());
+    //  assertEquals(rightNow.getDay(), savedCustomerOrderTime.getDay());
+    // }
 
 }

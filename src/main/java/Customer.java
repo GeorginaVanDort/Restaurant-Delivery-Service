@@ -8,17 +8,17 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 public class Customer {
-  private String name;
+  private String customerName;
   private String phone;
-  private Timestamp orderTime;
+  // private Timestamp orderTime;
   private int id;
 
-  public Customer(String name, String phone){
-    this.name = name;
+  public Customer(String customerName, String phone){
+    this.customerName = customerName;
     this.phone = phone;
   }
-  public String getName(){
-    return name;
+  public String getCustomerName(){
+    return customerName;
   }
   public String getPhone(){
     return phone;
@@ -26,9 +26,9 @@ public class Customer {
   public int getId(){
     return id;
   }
-  public Timestamp getOrderTime(){
-    return orderTime;
-  }
+  // public Timestamp getOrderTime(){
+  //   return orderTime;
+  // }
 
   @Override
  public boolean equals(Object otherCustomer){
@@ -36,7 +36,7 @@ public class Customer {
      return false;
    } else {
      Customer newCustomer = (Customer) otherCustomer;
-     return this.getName().equals(newCustomer.getName()) &&
+     return this.getCustomerName().equals(newCustomer.getCustomerName()) &&
             this.getPhone().equals(newCustomer.getPhone());
    }
  }
@@ -48,9 +48,9 @@ public class Customer {
   }
   public void save() {
   try(Connection con = DB.sql2o.open()) {
-    String sql = "INSERT INTO customers (name, phone, ordertime) VALUES (:name, :phone, now())";
+    String sql = "INSERT INTO customers (customername, phone) VALUES (:customername, :phone)";
     this.id = (int) con.createQuery(sql, true)
-      .addParameter("name", this.name)
+      .addParameter("customername", this.customerName)
       .addParameter("phone", this.phone)
       .executeUpdate()
       .getKey();
