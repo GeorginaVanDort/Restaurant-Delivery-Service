@@ -20,7 +20,7 @@ public class RestaurantTest {
   @After
   public void tearDown() {
     try(Connection con = DB.sql2o.open()) {
-      String deleteRestaurantsQuery = "DELETE FROM restaurant *;";
+      String deleteRestaurantsQuery = "DELETE FROM restaurants *;";
       con.createQuery(deleteRestaurantsQuery).executeUpdate();
     }
   }

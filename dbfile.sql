@@ -2,26 +2,22 @@
 -- PostgreSQL database dump
 --
 
--- Dumped from database version 9.5.4
--- Dumped by pg_dump version 9.5.4
-
 SET statement_timeout = 0;
 SET lock_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SET check_function_bodies = false;
 SET client_min_messages = warning;
-SET row_security = off;
 
 --
--- Name: plpgsql; Type: EXTENSION; Schema: -; Owner:
+-- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
 --
 
 CREATE EXTENSION IF NOT EXISTS plpgsql WITH SCHEMA pg_catalog;
 
 
 --
--- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner:
+-- Name: EXTENSION plpgsql; Type: COMMENT; Schema: -; Owner: 
 --
 
 COMMENT ON EXTENSION plpgsql IS 'PL/pgSQL procedural language';
@@ -34,16 +30,13 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
-
--- Name: customers; Type: TABLE; Schema: public; Owner: Guest
-
+-- Name: customers; Type: TABLE; Schema: public; Owner: Guest; Tablespace: 
 --
 
 CREATE TABLE customers (
     id integer NOT NULL,
     customername character varying,
-    phone character varying,
-    "time" timestamp without time zone
+    phone character varying
 );
 
 
@@ -71,14 +64,14 @@ ALTER SEQUENCE customers_id_seq OWNED BY customers.id;
 
 
 --
--- Name: menuitems; Type: TABLE; Schema: public; Owner: Guest; Tablespace:
+-- Name: menuitems; Type: TABLE; Schema: public; Owner: Guest; Tablespace: 
 --
 
 CREATE TABLE menuitems (
     id integer NOT NULL,
     restaurantid integer,
-    menuitem integer,
-    price double precision
+    price double precision,
+    itemname character varying
 );
 
 
@@ -106,7 +99,7 @@ ALTER SEQUENCE menuitems_id_seq OWNED BY menuitems.id;
 
 
 --
--- Name: orders; Type: TABLE; Schema: public; Owner: Guest; Tablespace:
+-- Name: orders; Type: TABLE; Schema: public; Owner: Guest; Tablespace: 
 --
 
 CREATE TABLE orders (
@@ -142,10 +135,10 @@ ALTER SEQUENCE orders_id_seq OWNED BY orders.id;
 
 
 --
--- Name: restaurant; Type: TABLE; Schema: public; Owner: Guest; Tablespace:
+-- Name: restaurants; Type: TABLE; Schema: public; Owner: Guest; Tablespace: 
 --
 
-CREATE TABLE restaurant (
+CREATE TABLE restaurants (
     id integer NOT NULL,
     name character varying,
     cuisine character varying,
@@ -155,7 +148,7 @@ CREATE TABLE restaurant (
 );
 
 
-ALTER TABLE restaurant OWNER TO "Guest";
+ALTER TABLE restaurants OWNER TO "Guest";
 
 --
 -- Name: restaurant_id_seq; Type: SEQUENCE; Schema: public; Owner: Guest
@@ -175,7 +168,7 @@ ALTER TABLE restaurant_id_seq OWNER TO "Guest";
 -- Name: restaurant_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: Guest
 --
 
-ALTER SEQUENCE restaurant_id_seq OWNED BY restaurant.id;
+ALTER SEQUENCE restaurant_id_seq OWNED BY restaurants.id;
 
 
 --
@@ -203,15 +196,14 @@ ALTER TABLE ONLY orders ALTER COLUMN id SET DEFAULT nextval('orders_id_seq'::reg
 -- Name: id; Type: DEFAULT; Schema: public; Owner: Guest
 --
 
-ALTER TABLE ONLY restaurant ALTER COLUMN id SET DEFAULT nextval('restaurant_id_seq'::regclass);
+ALTER TABLE ONLY restaurants ALTER COLUMN id SET DEFAULT nextval('restaurant_id_seq'::regclass);
 
 
 --
 -- Data for Name: customers; Type: TABLE DATA; Schema: public; Owner: Guest
 --
 
-COPY customers (id, customername, phone, "time") FROM stdin;
-
+COPY customers (id, customername, phone) FROM stdin;
 \.
 
 
@@ -219,15 +211,14 @@ COPY customers (id, customername, phone, "time") FROM stdin;
 -- Name: customers_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Guest
 --
 
-SELECT pg_catalog.setval('customers_id_seq', 1, false);
+SELECT pg_catalog.setval('customers_id_seq', 228, true);
 
 
 --
-
 -- Data for Name: menuitems; Type: TABLE DATA; Schema: public; Owner: Guest
 --
 
-COPY menuitems (id, restaurantid, menuitem, price) FROM stdin;
+COPY menuitems (id, restaurantid, price, itemname) FROM stdin;
 \.
 
 
@@ -254,31 +245,30 @@ SELECT pg_catalog.setval('orders_id_seq', 1, false);
 
 
 --
--- Data for Name: restaurant; Type: TABLE DATA; Schema: public; Owner: Guest
+-- Name: restaurant_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Guest
 --
 
-COPY restaurant (id, name, cuisine, hours, address, price) FROM stdin;
+SELECT pg_catalog.setval('restaurant_id_seq', 923, true);
+
+
+--
+-- Data for Name: restaurants; Type: TABLE DATA; Schema: public; Owner: Guest
+--
+
+COPY restaurants (id, name, cuisine, hours, address, price) FROM stdin;
 \.
 
 
 --
--- Name: restaurant_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Guest
---
-
-SELECT pg_catalog.setval('restaurant_id_seq', 1, false);
-
-
---
--- Name: customers_pkey; Type: CONSTRAINT; Schema: public; Owner: Guest; Tablespace:
+-- Name: customers_pkey; Type: CONSTRAINT; Schema: public; Owner: Guest; Tablespace: 
 --
 
 ALTER TABLE ONLY customers
     ADD CONSTRAINT customers_pkey PRIMARY KEY (id);
 
 
-
 --
--- Name: menuitems_pkey; Type: CONSTRAINT; Schema: public; Owner: Guest; Tablespace:
+-- Name: menuitems_pkey; Type: CONSTRAINT; Schema: public; Owner: Guest; Tablespace: 
 --
 
 ALTER TABLE ONLY menuitems
@@ -286,7 +276,7 @@ ALTER TABLE ONLY menuitems
 
 
 --
--- Name: orders_pkey; Type: CONSTRAINT; Schema: public; Owner: Guest; Tablespace:
+-- Name: orders_pkey; Type: CONSTRAINT; Schema: public; Owner: Guest; Tablespace: 
 --
 
 ALTER TABLE ONLY orders
@@ -294,12 +284,11 @@ ALTER TABLE ONLY orders
 
 
 --
--- Name: restaurant_pkey; Type: CONSTRAINT; Schema: public; Owner: Guest; Tablespace:
+-- Name: restaurant_pkey; Type: CONSTRAINT; Schema: public; Owner: Guest; Tablespace: 
 --
 
-ALTER TABLE ONLY restaurant
+ALTER TABLE ONLY restaurants
     ADD CONSTRAINT restaurant_pkey PRIMARY KEY (id);
-
 
 
 --
@@ -315,3 +304,4 @@ GRANT ALL ON SCHEMA public TO PUBLIC;
 --
 -- PostgreSQL database dump complete
 --
+
