@@ -86,5 +86,25 @@ public class Restaurant {
     }
   }
 
+  public void delete() {
+      try(Connection con = DB.sql2o.open()) {
+        String sql = "delete from restaurants where id = :id;";
+        con.createQuery(sql)
+          .addParameter("id", this.id)
+          .executeUpdate();
+      }
+    }
 
+  public void update() {
+    try (Connection con = DB.sql2o.open()){
+      String sql = "update restaurants set name = :name, cuisine = :cuisine, hours = :hours, address = :address, price = :price where id=:id";
+      con.createQuery(sql)
+      .addParameter("name", this.name)
+      .addParameter("cuisine", this.cuisine)
+      .addParameter("hours", this.hours)
+      .addParameter("price", this.price)
+      .addParameter("id", this.id)
+      .executeUpdate();
+    }
+  }
 }
