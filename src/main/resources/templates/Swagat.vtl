@@ -1,0 +1,60 @@
+<div class="row">
+  <img class="img-responsive" src="img/indianbanner.jpg" alt="">
+  <h1>Swagat</h1>
+  <h2><i>Come experience our fragant dishes.</i></h2>
+  <div class="col-xs-8">
+    <h2>Menu</h2>
+    <form action='/customers' method="post">
+    <div class="row">
+      <div class="form-group col-xs-6">
+        <label for="first">First name: </label>
+        <input id="first" name="first" class="form-control" type="text">
+      </div>
+      <div class="form-group col-xs-6">
+        <label for="last">Last Name: </label>
+        <input id="last" name="last" class="form-control" type="text">
+      </div>
+      <div class="form-group col-xs-6">
+        <label for="phone">Phone Number: </label>
+        <input id="phone" name="phone" class="form-control" type="text">
+      </div>
+      <div class="form-group col-xs-6">
+        <label for="address">Street Address: </label>
+        <input id="address" name="address" class="form-control" type="text">
+      </div>
+      <div class="form-group col-xs-6">
+        <label for="city">City: </label>
+        <input id="city" name="city" class="form-control" type="text">
+      </div>
+      <div class="form-group col-xs-3">
+        <label for="state">State: </label>
+        <input id="state" name="state" class="form-control" type="text">
+      </div>
+      <div class="form-group col-xs-3">
+        <label for="zip">Zip: </label>
+        <input id="zip" name="zip" class="form-control" type="text">
+      </div>
+      <div class="form-group col-xs-9">
+        <label for="email">Email: </label>
+        <input id="email" name="email" class="form-control" type="text">
+      </div>
+      <div class="form-group col-xs-3">
+      </div>
+    </div>
+      <button type='submit' class='btn'>Add Customer!</button>
+    </form>
+  </div>
+  <div class="col-xs-4">
+  <h2>Customers:</h2>
+  #if($customers)
+    <ul>
+    #foreach($customer in $customers)
+      <li><a href="customers/$customer.getId()">$customer.geName()</a></li>
+    #end
+    </ul>
+  #else
+
+  #end
+
+  </div>
+</div>
