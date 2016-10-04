@@ -16,7 +16,6 @@ public class Restaurant {
     this.hours = hours;
     this.address = address;
     this.price = price;
-    this.save();
   }
 
   public String getName() {
@@ -86,5 +85,26 @@ public class Restaurant {
     }
   }
 
+  public void delete() {
+      try(Connection con = DB.sql2o.open()) {
+        String sql = "delete from restaurants where id = :id;";
+        con.createQuery(sql)
+          .addParameter("id", this.id)
+          .executeUpdate();
+      }
+    }
 
+  public void update(String name, String cuisine, String hours, String address, String price) {
+    try (Connection con = DB.sql2o.open()){
+      String sql = "update restaurants set name = :name, cuisine = :cuisine, hours = :hours, address = :address, price = :price where id=:id";
+      con.createQuery(sql)
+      .addParameter("name", name)
+      .addParameter("cuisine", cuisine)
+      .addParameter("hours", hours)
+      .addParameter("address", address)
+      .addParameter("price", price)
+      .addParameter("id", id)
+      .executeUpdate();
+    }
+  }
 }
