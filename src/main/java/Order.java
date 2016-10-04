@@ -5,7 +5,7 @@ import java.sql.Timestamp;
 import java.math.*;
 
 
-public class MenuItem {
+public class Order {
   private int id;
   private int menuid;
   private int quantity;
@@ -13,13 +13,11 @@ public class MenuItem {
   private Timestamp ordertime;
 
 
-  public MenuItem(int menuid, int quantity, int cusotmerid, Timestamp ordertime){
+  public Order(int menuid, int quantity, int cusotmerid, Timestamp ordertime){
     this.menuid = menuid;
     this.quantity = quantity;
     this.cusotmerid = cusotmerid;
     this.ordertime = ordertime;
-
-
   }
 
   public int getMenuid(){

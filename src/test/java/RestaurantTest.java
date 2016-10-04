@@ -13,8 +13,11 @@ public class RestaurantTest {
   @Before
   public void initialize() {
   testRestaurant = new Restaurant("Swagat", "Indian", "11 am - 9 pm", "4325 SW 109th Ave, Beaverton, OR 97005", "$$");
+  testRestaurant.save();
   firstRestaurant = new Restaurant("Swagat", "Indian", "11 am - 9 pm", "4325 SW 109th Ave, Beaverton, OR 97005", "$$");
+  firstRestaurant.save();
   secondRestaurant = new Restaurant("Tres Potros", "Mexican", "11 am - 9pm", "12950 SW Canyon Rd, Beaverton, OR 97005 ", "$");
+  secondRestaurant.save();
   }
 
   @After
@@ -73,15 +76,27 @@ public class RestaurantTest {
 
   @Test
   public void getId_returnsIdOfRestaurant_true() {
-    Restaurant another = new Restaurant("Swagat", "Indian", "11 am - 9 pm", "4325 SW 109th Ave, Beaverton, OR 97005", "$$");
-    Restaurant anotherClone = Restaurant.all().get(3);
-    assertEquals(anotherClone.getId(), another.getId());
+    assertTrue(testRestaurant.getId() > 0);
   }
 
   @Test
   public void find_returnsRestaurantWithCorrectId_True() {
-    Restaurant another = new Restaurant("Swagat", "Indian", "11 am - 9 pm", "4325 SW 109th Ave, Beaverton, OR 97005", "$$");
     assertEquals(Restaurant.find(testRestaurant.getId()), testRestaurant);
 
   }
+
+  @Test
+  public void delete_deletesRestaurants_true(){
+    testRestaurant.delete();
+    firstRestaurant.delete();
+    secondRestaurant.delete();
+    assertEquals(null, Restaurant.find(testRestaurant.getId()));
+  }
+
+  @Test
+  public void update_updatesClientDescription_true() {
+    testRestaurant.update("Testing", "Indian", "11 am - 9 pm", "4325 SW 109th Ave, Beaverton, OR 97005", "$$");
+    assertEquals("Testing", Restaurant.find(testRestaurant.getId()).getName());
+  }
+
 }
