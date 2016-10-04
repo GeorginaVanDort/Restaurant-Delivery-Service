@@ -33,6 +33,53 @@ public class MenuItem {
     return id;
   }
 
+  @Override
+  public boolean equals(Object otherMenuItem) {
+    if(!(otherMenuItem instanceof MenuItem)) {
+      return false;
+    } else {
+      MenuItem newMenuItem = (MenuItem) otherMenuItem;
+      return this.getItemName().equals(newMenuItem.getItemName()) && this.getRestaurantId() == (newMenuItem.getRestaurantId());
+    }
+  }
 
+  public void save() {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "INSERT INTO menuitems (itemName, restaurantId, price) VALUES (:itemName, :restaurantId, :price)";
+      this.id = (int) con.createQuery(sql, true)
+        .addParameter("itemName", this.itemName)
+        .addParameter("restaurantId", this.restaurantId)
+        .addParameter("price", this.price)
+        .executeUpdate()
+        .getKey();
+    }
+  }
 
+  public static List<MenuItem> all() {
+    String sql = "SELECT * FROM menuitems;";
+    try(Connection con = DB.sql2o.open()) {
+      return con.createQuery(sql)
+      .throwOnMappingFailure(false)
+      .executeAndFetch(MenuItem.class);
+    }
+  }
+
+  public static MenuItem find(int id) {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "SELECT * FROM menuitems where id=:id";
+      MenuItem menuItem = con.createQuery(sql)
+        .addParameter("id", id)
+        .executeAndFetchFirst(MenuItem.class);
+        return menuItem;
+    }
+  }
+
+  public void delete() {
+      try(Connection con = DB.sql2o.open()) {
+        String sql = "delete from menuitems where id = :id;";
+        con.createQuery(sql)
+          .addParameter("id", this.id)
+          .executeUpdate();
+      }
+    }
 }
