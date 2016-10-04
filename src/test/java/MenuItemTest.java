@@ -21,10 +21,37 @@ public class MenuItemTest {
       assertEquals(true, testMenuItem instanceof MenuItem);
     }
 
+  @Test
+    public void save_savesIntoDatabase_true() {
+      MenuItem testMenuItem = menuitem;
+      testMenuItem.save();
+      assertTrue(MenuItem.all().get(0).equals(testMenuItem));
+    }
 
+  @Test
+    public void equals_returnsTrueIfItemNamesAretheSame() {
+       MenuItem firstMenuItem = menuitem;
+       MenuItem secondMenuItem = menuitem;
+       assertTrue(firstMenuItem.equals(secondMenuItem));
+     }
 
+  @Test
+   public void all_returnsAllInstancesOfMenuItem_true() {
+     MenuItem firstMenuItem = menuitem;
+     firstMenuItem.save();
+     MenuItem secondMenuItem = new MenuItem("Burger", 2, 12.50);
+     secondMenuItem.save();
+     assertEquals(true, MenuItem.all().get(0).equals(firstMenuItem));
+     assertEquals(true, MenuItem.all().get(1).equals(secondMenuItem));
+   }
 
-
+   @Test
+   public void save_assignsIdToObject_True() {
+     MenuItem testMenuItem = menuitem;
+     testMenuItem.save();
+     MenuItem savedMenuItem = MenuItem.all().get(0);
+     assertEquals(testMenuItem.getId(), savedMenuItem.getId());
+   }
 
 
 

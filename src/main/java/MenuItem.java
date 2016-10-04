@@ -39,7 +39,7 @@ public class MenuItem {
       return false;
     } else {
       MenuItem newMenuItem = (MenuItem) otherMenuItem;
-      return this.getItemName().equals(newMenuItem.getItemName()) && this.getRestaurantId()==(newMenuItem.getRestaurantId());
+      return this.getItemName().equals(newMenuItem.getItemName()) && this.getRestaurantId() == (newMenuItem.getRestaurantId());
     }
   }
 
@@ -52,6 +52,25 @@ public class MenuItem {
         .addParameter("price", this.price)
         .executeUpdate()
         .getKey();
+    }
+  }
+
+  public static List<MenuItem> all() {
+    String sql = "SELECT * FROM menuitems;";
+    try(Connection con = DB.sql2o.open()) {
+      return con.createQuery(sql)
+      .throwOnMappingFailure(false)
+      .executeAndFetch(MenuItem.class);
+    }
+  }
+
+  public static MenuItem find(int id) {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "SELECT * FROM menuitems where id=:id";
+      MenuItem menuItem = con.createQuery(sql)
+        .addParameter("id", id)
+        .executeAndFetchFirst(MenuItem.class);
+        return menuItem;
     }
   }
 
