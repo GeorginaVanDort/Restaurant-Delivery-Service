@@ -16,7 +16,6 @@ public class Restaurant {
     this.hours = hours;
     this.address = address;
     this.price = price;
-    // this.save();
   }
 
   public String getName() {
