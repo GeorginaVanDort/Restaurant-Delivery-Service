@@ -10,7 +10,7 @@ public class Restaurant {
   public String price;
   public int id;
 
-  public Restaurant(String name, String cuisine, String hours, String address, String price) {
+  public Restaurant (String name, String cuisine, String hours, String address, String price) {
     this.name = name;
     this.cuisine = cuisine;
     this.hours = hours;
@@ -54,7 +54,7 @@ public class Restaurant {
 
   public void save() {
     try(Connection con = DB.sql2o.open()) {
-      String sql = "INSERT INTO restaurants (name, cuisine, hours, address, price) VALUES (:name, :cuisne, :horus, :address, : price)";
+      String sql = "INSERT INTO restaurants (name, cuisine, hours, address, price) VALUES (:name, :cuisine, :hours, :address, :price)";
       this.id = (int) con.createQuery(sql, true)
         .addParameter("name", this.name)
         .addParameter("cuisine", this.cuisine)
@@ -67,9 +67,11 @@ public class Restaurant {
   }
 
   public static List<Restaurant> all() {
-    String sql = "SELECT id, name, cuisine, hours, address, price FROM restaurants";
+    String sql = "SELECT * FROM restaurants;";
     try(Connection con = DB.sql2o.open()) {
-      return con.createQuery(sql).executeAndFetch(Restaurant.class);
+      return con.createQuery(sql)
+      .throwOnMappingFailure(false)
+      .executeAndFetch(Restaurant.class);
     }
   }
 
@@ -83,5 +85,26 @@ public class Restaurant {
     }
   }
 
+  public void delete() {
+      try(Connection con = DB.sql2o.open()) {
+        String sql = "delete from restaurants where id = :id;";
+        con.createQuery(sql)
+          .addParameter("id", this.id)
+          .executeUpdate();
+      }
+    }
 
+  public void update(String name, String cuisine, String hours, String address, String price) {
+    try (Connection con = DB.sql2o.open()){
+      String sql = "update restaurants set name = :name, cuisine = :cuisine, hours = :hours, address = :address, price = :price where id=:id";
+      con.createQuery(sql)
+      .addParameter("name", name)
+      .addParameter("cuisine", cuisine)
+      .addParameter("hours", hours)
+      .addParameter("address", address)
+      .addParameter("price", price)
+      .addParameter("id", id)
+      .executeUpdate();
+    }
+  }
 }
