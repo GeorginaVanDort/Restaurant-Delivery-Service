@@ -11,51 +11,52 @@ public class CustomerTest {
   @Rule
   public DatabaseRule database = new DatabaseRule();
 
+  Customer customer = new Customer("Henry", "503-123-4567", "123 fourth St");
+
   @Test
   public void customer_instantiatesCorrectly_true() {
-    Customer testCustomer = new Customer("Henry", "503-123-4567");
+    Customer testCustomer = customer;
     assertEquals(true, testCustomer instanceof Customer);
   }
 
   @Test
   public void getCustomerName_customerInstantiatesWithName_Henry() {
-  Customer testCustomer = new Customer("Henry", "503-123-4567");
+    Customer testCustomer = customer;
   assertEquals("Henry", testCustomer.getCustomerName());
   }
 
   @Test
-  public void getPhone_customerInstantiatesWithPhone_String() {
-  Customer testCustomer = new Customer("Henry", "503-123-4567");
-  assertEquals( "503-123-4567", testCustomer.getPhone());
+  public void getCustomerPhone_customerInstantiatesWithPhone_String() {
+    Customer testCustomer = customer;
+  assertEquals( "503-123-4567", testCustomer.getCustomerPhone());
   }
 
   @Test
   public void equals_returnsTrueIfNameAndPhoneAreSame_true() {
-    Customer firstCustomer = new Customer("Henry", "503-123-4567");
-    Customer anotherCustomer = new Customer("Henry", "503-123-4567");
-    assertTrue(firstCustomer.equals(anotherCustomer));
+    Customer testCustomer = customer;
+    Customer anotherCustomer = new Customer("Henry", "503-123-4567", "123 fourth St");
+    assertTrue(testCustomer.equals(anotherCustomer));
   }
 
   @Test
   public void save_insertsObjectIntoDatabase_Customer() {
-    Customer testCustomer = new Customer("Henry", "503-123-4567");
+    Customer testCustomer = customer;
     testCustomer.save();
     assertTrue(Customer.all().get(0).equals(testCustomer));
   }
 
   @Test
   public void all_returnsAllInstancesOfCustomer_true() {
-    Customer firstCustomer = new Customer("Henry", "503-123-4567");
-    firstCustomer.save();
-    Customer secondCustomer = new Customer("Harriet", "503-321-7654");
+    Customer testCustomer = customer;
+    Customer secondCustomer = new Customer("Harriet", "503-321-7654", "474 NW fdh");
     secondCustomer.save();
-    assertEquals(true, Customer.all().get(0).equals(firstCustomer));
+    assertEquals(true, Customer.all().get(0).equals(testCustomer));
     assertEquals(true, Customer.all().get(1).equals(secondCustomer));
   }
 
   @Test
    public void save_assignsIdToObject() {
-     Customer testCustomer = new Customer("Henry", "503-123-4567");
+     Customer testCustomer = customer;
      testCustomer.save();
      Customer savedCustomer = Customer.all().get(0);
      assertEquals(testCustomer.getId(), savedCustomer.getId());
@@ -63,15 +64,15 @@ public class CustomerTest {
 
    @Test
     public void find_returnsCustomerWithSameId_secondCustomer() {
-      Customer firstCustomer = new Customer("Henry", "503-123-4567");
-      firstCustomer.save();
-      Customer secondCustomer = new Customer("Harriet", "503-321-7654");
+      Customer testCustomer = customer;
+      testCustomer.save();
+      Customer secondCustomer = new Customer("Harriet", "503-321-7654", "474 NW fdh");
       secondCustomer.save();
       assertEquals(Customer.find(secondCustomer.getId()), secondCustomer);
   }
     // @Test
     // public void saveOrderTime_recordsOrderTimeOfCreationInDatabase() {
-    //  Customer testCustomer = new Customer("Henry", "503-123-4567");
+    //    Customer testCustomer = customer;
     //  testCustomer.save();
     //  Timestamp savedCustomerOrderTime = Customer.find(testCustomer.getId()).getOrderTime();
     //  Timestamp rightNow = new Timestamp(new Date().getTime());
