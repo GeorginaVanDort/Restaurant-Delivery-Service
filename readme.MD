@@ -18,16 +18,16 @@ Local food delivery service.
 
 
 #### Database Diagram:
-![database diagram](screenshot2.png)
+![database diagram](schema.png)
 
 #### Technical Specifications:
 ![Specifications diagram](picture here)
 ## Setup/Installation
 * Clone directory
 * Setup database in PSQL:
-  * Production Database: delivery_service
-  * Development Database: delivery_service_test
-  * Table Names: restaurants, menuItems,orders,customers
+  * Production Database: food_delivery
+  * Development Database: food_delivery_test
+  * Table Names: restaurants, menuitems, orders, customers
   * CREATE TABLE customers(id serial PRIMARY KEY, name varchar, phone varchar, ordertime timestamp);
 * Type 'gradle run' inside the directory
 * Navigate to 'http://localhost:4567'

@@ -30,23 +30,25 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- Name: customers; Type: TABLE; Schema: public; Owner: Guest; Tablespace: 
+-- Name: customerdetails; Type: TABLE; Schema: public; Owner: Guest; Tablespace: 
 --
 
-CREATE TABLE customers (
+CREATE TABLE customerdetails (
     id integer NOT NULL,
     customername character varying,
-    phone character varying
+    customerphone character varying,
+    customeraddress character varying,
+    ordertime timestamp without time zone
 );
 
 
-ALTER TABLE customers OWNER TO "Guest";
+ALTER TABLE customerdetails OWNER TO "Guest";
 
 --
--- Name: customers_id_seq; Type: SEQUENCE; Schema: public; Owner: Guest
+-- Name: customerdetails_id_seq; Type: SEQUENCE; Schema: public; Owner: Guest
 --
 
-CREATE SEQUENCE customers_id_seq
+CREATE SEQUENCE customerdetails_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -54,13 +56,47 @@ CREATE SEQUENCE customers_id_seq
     CACHE 1;
 
 
-ALTER TABLE customers_id_seq OWNER TO "Guest";
+ALTER TABLE customerdetails_id_seq OWNER TO "Guest";
 
 --
--- Name: customers_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: Guest
+-- Name: customerdetails_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: Guest
 --
 
-ALTER SEQUENCE customers_id_seq OWNED BY customers.id;
+ALTER SEQUENCE customerdetails_id_seq OWNED BY customerdetails.id;
+
+
+--
+-- Name: finalorders; Type: TABLE; Schema: public; Owner: Guest; Tablespace: 
+--
+
+CREATE TABLE finalorders (
+    id integer NOT NULL,
+    ordereditems_id integer,
+    customerdetails_id integer
+);
+
+
+ALTER TABLE finalorders OWNER TO "Guest";
+
+--
+-- Name: finalorders_id_seq; Type: SEQUENCE; Schema: public; Owner: Guest
+--
+
+CREATE SEQUENCE finalorders_id_seq
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE finalorders_id_seq OWNER TO "Guest";
+
+--
+-- Name: finalorders_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: Guest
+--
+
+ALTER SEQUENCE finalorders_id_seq OWNED BY finalorders.id;
 
 
 --
@@ -68,56 +104,34 @@ ALTER SEQUENCE customers_id_seq OWNED BY customers.id;
 --
 
 CREATE TABLE menuitems (
-    id integer NOT NULL,
     restaurantid integer,
     price double precision,
-    itemname character varying
+    itemname character varying,
+    id integer
 );
 
 
 ALTER TABLE menuitems OWNER TO "Guest";
 
 --
--- Name: menuitems_id_seq; Type: SEQUENCE; Schema: public; Owner: Guest
+-- Name: ordereditems; Type: TABLE; Schema: public; Owner: Guest; Tablespace: 
 --
 
-CREATE SEQUENCE menuitems_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE menuitems_id_seq OWNER TO "Guest";
-
---
--- Name: menuitems_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: Guest
---
-
-ALTER SEQUENCE menuitems_id_seq OWNED BY menuitems.id;
-
-
---
--- Name: orders; Type: TABLE; Schema: public; Owner: Guest; Tablespace: 
---
-
-CREATE TABLE orders (
+CREATE TABLE ordereditems (
     id integer NOT NULL,
-    menuid integer,
+    menuitem_id integer,
     quantity integer,
-    cusotmerid integer,
-    ordertime timestamp without time zone
+    subtotal integer
 );
 
 
-ALTER TABLE orders OWNER TO "Guest";
+ALTER TABLE ordereditems OWNER TO "Guest";
 
 --
--- Name: orders_id_seq; Type: SEQUENCE; Schema: public; Owner: Guest
+-- Name: ordereditems_id_seq; Type: SEQUENCE; Schema: public; Owner: Guest
 --
 
-CREATE SEQUENCE orders_id_seq
+CREATE SEQUENCE ordereditems_id_seq
     START WITH 1
     INCREMENT BY 1
     NO MINVALUE
@@ -125,13 +139,13 @@ CREATE SEQUENCE orders_id_seq
     CACHE 1;
 
 
-ALTER TABLE orders_id_seq OWNER TO "Guest";
+ALTER TABLE ordereditems_id_seq OWNER TO "Guest";
 
 --
--- Name: orders_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: Guest
+-- Name: ordereditems_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: Guest
 --
 
-ALTER SEQUENCE orders_id_seq OWNED BY orders.id;
+ALTER SEQUENCE ordereditems_id_seq OWNED BY ordereditems.id;
 
 
 --
@@ -139,156 +153,129 @@ ALTER SEQUENCE orders_id_seq OWNED BY orders.id;
 --
 
 CREATE TABLE restaurants (
-    id integer NOT NULL,
     name character varying,
     cuisine character varying,
     hours character varying,
     address character varying,
-    price character varying
+    price character varying,
+    id integer
 );
 
 
 ALTER TABLE restaurants OWNER TO "Guest";
 
 --
--- Name: restaurant_id_seq; Type: SEQUENCE; Schema: public; Owner: Guest
+-- Name: id; Type: DEFAULT; Schema: public; Owner: Guest
 --
 
-CREATE SEQUENCE restaurant_id_seq
-    START WITH 1
-    INCREMENT BY 1
-    NO MINVALUE
-    NO MAXVALUE
-    CACHE 1;
-
-
-ALTER TABLE restaurant_id_seq OWNER TO "Guest";
-
---
--- Name: restaurant_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: Guest
---
-
-ALTER SEQUENCE restaurant_id_seq OWNED BY restaurants.id;
+ALTER TABLE ONLY customerdetails ALTER COLUMN id SET DEFAULT nextval('customerdetails_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: public; Owner: Guest
 --
 
-ALTER TABLE ONLY customers ALTER COLUMN id SET DEFAULT nextval('customers_id_seq'::regclass);
+ALTER TABLE ONLY finalorders ALTER COLUMN id SET DEFAULT nextval('finalorders_id_seq'::regclass);
 
 
 --
 -- Name: id; Type: DEFAULT; Schema: public; Owner: Guest
 --
 
-ALTER TABLE ONLY menuitems ALTER COLUMN id SET DEFAULT nextval('menuitems_id_seq'::regclass);
+ALTER TABLE ONLY ordereditems ALTER COLUMN id SET DEFAULT nextval('ordereditems_id_seq'::regclass);
 
 
 --
--- Name: id; Type: DEFAULT; Schema: public; Owner: Guest
+-- Data for Name: customerdetails; Type: TABLE DATA; Schema: public; Owner: Guest
 --
 
-ALTER TABLE ONLY orders ALTER COLUMN id SET DEFAULT nextval('orders_id_seq'::regclass);
-
-
---
--- Name: id; Type: DEFAULT; Schema: public; Owner: Guest
---
-
-ALTER TABLE ONLY restaurants ALTER COLUMN id SET DEFAULT nextval('restaurant_id_seq'::regclass);
-
-
---
--- Data for Name: customers; Type: TABLE DATA; Schema: public; Owner: Guest
---
-
-COPY customers (id, customername, phone) FROM stdin;
+COPY customerdetails (id, customername, customerphone, customeraddress, ordertime) FROM stdin;
 \.
 
 
 --
--- Name: customers_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Guest
+-- Name: customerdetails_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Guest
 --
 
-SELECT pg_catalog.setval('customers_id_seq', 228, true);
+SELECT pg_catalog.setval('customerdetails_id_seq', 1, false);
+
+
+--
+-- Data for Name: finalorders; Type: TABLE DATA; Schema: public; Owner: Guest
+--
+
+COPY finalorders (id, ordereditems_id, customerdetails_id) FROM stdin;
+\.
+
+
+--
+-- Name: finalorders_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Guest
+--
+
+SELECT pg_catalog.setval('finalorders_id_seq', 1, false);
 
 
 --
 -- Data for Name: menuitems; Type: TABLE DATA; Schema: public; Owner: Guest
 --
 
-COPY menuitems (id, restaurantid, price, itemname) FROM stdin;
+COPY menuitems (restaurantid, price, itemname, id) FROM stdin;
 \.
 
 
 --
--- Name: menuitems_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Guest
+-- Data for Name: ordereditems; Type: TABLE DATA; Schema: public; Owner: Guest
 --
 
-SELECT pg_catalog.setval('menuitems_id_seq', 1, false);
-
-
---
--- Data for Name: orders; Type: TABLE DATA; Schema: public; Owner: Guest
---
-
-COPY orders (id, menuid, quantity, cusotmerid, ordertime) FROM stdin;
+COPY ordereditems (id, menuitem_id, quantity, subtotal) FROM stdin;
 \.
 
 
 --
--- Name: orders_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Guest
+-- Name: ordereditems_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Guest
 --
 
-SELECT pg_catalog.setval('orders_id_seq', 1, false);
-
-
---
--- Name: restaurant_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Guest
---
-
-SELECT pg_catalog.setval('restaurant_id_seq', 923, true);
+SELECT pg_catalog.setval('ordereditems_id_seq', 1, false);
 
 
 --
 -- Data for Name: restaurants; Type: TABLE DATA; Schema: public; Owner: Guest
 --
 
-COPY restaurants (id, name, cuisine, hours, address, price) FROM stdin;
+COPY restaurants (name, cuisine, hours, address, price, id) FROM stdin;
+Happy Panda	Chinese	Lunch-Dinner	1234 N Wilcox Rd	$$	1
+Casa Lola	Mexican	Lunch-Dinner	1234 N Homer St.	$$	2
+Subs Station	American	Lunch-Dinner	1234 N Marge St.	$	3
+DU KUH BEE	Chinese	Lunch-Dinner	1234 N Bart St.	$$	4
+Decarli	Itallian	Lunch-Dinner	1234 N lisa St.	$$$	5
+Swagat	Indian	Lunch-Dinner	1234 N Magy St.	$$$	6
+Pho Van	Vietnamese	Lunch-Dinner	1234 N Magy St.	$	7
+Thai Bloom	Thai	Lunch-Dinner	1234 N Magy St.	$$$	8
 \.
 
 
 --
--- Name: customers_pkey; Type: CONSTRAINT; Schema: public; Owner: Guest; Tablespace: 
+-- Name: customerdetails_pkey; Type: CONSTRAINT; Schema: public; Owner: Guest; Tablespace: 
 --
 
-ALTER TABLE ONLY customers
-    ADD CONSTRAINT customers_pkey PRIMARY KEY (id);
-
-
---
--- Name: menuitems_pkey; Type: CONSTRAINT; Schema: public; Owner: Guest; Tablespace: 
---
-
-ALTER TABLE ONLY menuitems
-    ADD CONSTRAINT menuitems_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY customerdetails
+    ADD CONSTRAINT customerdetails_pkey PRIMARY KEY (id);
 
 
 --
--- Name: orders_pkey; Type: CONSTRAINT; Schema: public; Owner: Guest; Tablespace: 
+-- Name: finalorders_pkey; Type: CONSTRAINT; Schema: public; Owner: Guest; Tablespace: 
 --
 
-ALTER TABLE ONLY orders
-    ADD CONSTRAINT orders_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY finalorders
+    ADD CONSTRAINT finalorders_pkey PRIMARY KEY (id);
 
 
 --
--- Name: restaurant_pkey; Type: CONSTRAINT; Schema: public; Owner: Guest; Tablespace: 
+-- Name: ordereditems_pkey; Type: CONSTRAINT; Schema: public; Owner: Guest; Tablespace: 
 --
 
-ALTER TABLE ONLY restaurants
-    ADD CONSTRAINT restaurant_pkey PRIMARY KEY (id);
+ALTER TABLE ONLY ordereditems
+    ADD CONSTRAINT ordereditems_pkey PRIMARY KEY (id);
 
 
 --
