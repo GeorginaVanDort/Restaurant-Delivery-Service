@@ -7,66 +7,63 @@ import java.text.DateFormat;
 
 
 public class CustomerTest {
+  private Customer testCustomer;
+  private Customer firstCustomer;
+  private Customer secondCustomer;
 
   @Rule
   public DatabaseRule database = new DatabaseRule();
 
+  @Before
+  public void initialize() {
+  testCustomer = new Customer("Henry", "503-123-4567", "Beaverton, Oregon");
+  testCustomer.save();
+  firstCustomer = new Customer("Bennett", "422-982-9375", "Portland");
+  firstCustomer.save();
+  secondCustomer = new Customer("Harriet", "503-321-7654", "McMinnville, Oregon");
+  secondCustomer.save();
+  }
+
   @Test
   public void customer_instantiatesCorrectly_true() {
-    Customer testCustomer = new Customer("Henry", "503-123-4567");
     assertEquals(true, testCustomer instanceof Customer);
   }
 
   @Test
   public void getCustomerName_customerInstantiatesWithName_Henry() {
-  Customer testCustomer = new Customer("Henry", "503-123-4567");
   assertEquals("Henry", testCustomer.getCustomerName());
   }
 
   @Test
   public void getPhone_customerInstantiatesWithPhone_String() {
-  Customer testCustomer = new Customer("Henry", "503-123-4567");
   assertEquals( "503-123-4567", testCustomer.getPhone());
   }
 
   @Test
   public void equals_returnsTrueIfNameAndPhoneAreSame_true() {
-    Customer firstCustomer = new Customer("Henry", "503-123-4567");
-    Customer anotherCustomer = new Customer("Henry", "503-123-4567");
-    assertTrue(firstCustomer.equals(anotherCustomer));
+    Customer anotherCustomer = new Customer("Henry", "503-123-4567", "Beaverton, Oregon");
+    assertTrue(testCustomer.equals(anotherCustomer));
   }
 
   @Test
   public void save_insertsObjectIntoDatabase_Customer() {
-    Customer testCustomer = new Customer("Henry", "503-123-4567");
-    testCustomer.save();
     assertTrue(Customer.all().get(0).equals(testCustomer));
   }
 
   @Test
   public void all_returnsAllInstancesOfCustomer_true() {
-    Customer firstCustomer = new Customer("Henry", "503-123-4567");
-    firstCustomer.save();
-    Customer secondCustomer = new Customer("Harriet", "503-321-7654");
-    secondCustomer.save();
-    assertEquals(true, Customer.all().get(0).equals(firstCustomer));
+    assertEquals(true, Customer.all().get(0).equals(testCustomer));
     assertEquals(true, Customer.all().get(1).equals(secondCustomer));
   }
 
   @Test
    public void save_assignsIdToObject() {
-     Customer testCustomer = new Customer("Henry", "503-123-4567");
-     testCustomer.save();
      Customer savedCustomer = Customer.all().get(0);
      assertEquals(testCustomer.getId(), savedCustomer.getId());
    }
 
    @Test
     public void find_returnsCustomerWithSameId_secondCustomer() {
-      Customer firstCustomer = new Customer("Henry", "503-123-4567");
-      firstCustomer.save();
-      Customer secondCustomer = new Customer("Harriet", "503-321-7654");
-      secondCustomer.save();
       assertEquals(Customer.find(secondCustomer.getId()), secondCustomer);
   }
     // @Test
