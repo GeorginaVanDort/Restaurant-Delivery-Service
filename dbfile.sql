@@ -2,12 +2,16 @@
 -- PostgreSQL database dump
 --
 
+-- Dumped from database version 9.5.4
+-- Dumped by pg_dump version 9.5.4
+
 SET statement_timeout = 0;
 SET lock_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SET check_function_bodies = false;
 SET client_min_messages = warning;
+SET row_security = off;
 
 --
 -- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
@@ -30,7 +34,7 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- Name: customerdetails; Type: TABLE; Schema: public; Owner: Guest; Tablespace: 
+-- Name: customerdetails; Type: TABLE; Schema: public; Owner: Guest
 --
 
 CREATE TABLE customerdetails (
@@ -66,7 +70,7 @@ ALTER SEQUENCE customerdetails_id_seq OWNED BY customerdetails.id;
 
 
 --
--- Name: finalorders; Type: TABLE; Schema: public; Owner: Guest; Tablespace: 
+-- Name: finalorders; Type: TABLE; Schema: public; Owner: Guest
 --
 
 CREATE TABLE finalorders (
@@ -100,7 +104,7 @@ ALTER SEQUENCE finalorders_id_seq OWNED BY finalorders.id;
 
 
 --
--- Name: menuitems; Type: TABLE; Schema: public; Owner: Guest; Tablespace: 
+-- Name: menuitems; Type: TABLE; Schema: public; Owner: Guest
 --
 
 CREATE TABLE menuitems (
@@ -114,7 +118,7 @@ CREATE TABLE menuitems (
 ALTER TABLE menuitems OWNER TO "Guest";
 
 --
--- Name: ordereditems; Type: TABLE; Schema: public; Owner: Guest; Tablespace: 
+-- Name: ordereditems; Type: TABLE; Schema: public; Owner: Guest
 --
 
 CREATE TABLE ordereditems (
@@ -149,7 +153,7 @@ ALTER SEQUENCE ordereditems_id_seq OWNED BY ordereditems.id;
 
 
 --
--- Name: restaurants; Type: TABLE; Schema: public; Owner: Guest; Tablespace: 
+-- Name: restaurants; Type: TABLE; Schema: public; Owner: Guest
 --
 
 CREATE TABLE restaurants (
@@ -220,6 +224,67 @@ SELECT pg_catalog.setval('finalorders_id_seq', 1, false);
 --
 
 COPY menuitems (restaurantid, price, itemname, id) FROM stdin;
+1	5.75	Crab Cream	1
+1	3.25	Spring Rolls	2
+1	3.75	Fried Wonton	3
+1	6.75	B.B.Q Pork	4
+1	5.5	Pot Sticker	5
+1	5.5	French Fries	6
+1	5.5	Fries Prawns	7
+1	10.5	Wonton Soup	9
+1	7.75	Veggies Roll	9
+2	5	Ensalada de Jicama	1
+2	5	Tostadaas de Tinga	2
+2	5	Nachos	3
+2	5	Taquitos de Pollo	4
+2	5	Two Tacos	5
+3	6	Deluxe	1
+3	5	French Dip	2
+3	5	Tuna	3
+3	5	Egg Salad	4
+3	5	MeatBall	5
+3	5	Bbq Beef	6
+3	5	Hawaiian	7
+3	5	Reugen	8
+3	5	Seafood	9
+4	6	Korean Bbq	1
+4	5	Grilled Meat	2
+4	5	Salad	3
+4	5	Egg Salad	4
+4	5	House special Soup	5
+4	5	Korean special bbq	6
+5	3	Truffled	1
+5	3.5	French Fries	2
+5	5	MeatBalls	3
+5	5	Caesar Salad	4
+5	6	Prosciutto panini	5
+5	7	Decarli burger	6
+5	5	Pizzetta	7
+5	6	Short rib sandwich	8
+6	3	Methu Vada	1
+6	3.5	Rava Dosa	2
+6	5	Plate idli	3
+6	5	Rava Masala	4
+6	6	Plain Dosa	5
+6	7	Andhra Dosa	6
+6	5	Onion Dosa	7
+6	6	Utappam	8
+7	3	An Choi	1
+7	3.5	Goi	2
+7	5	Rice Noodle	3
+7	5	Egg Noodle	4
+7	6	Pho	5
+7	7	Cuon	6
+7	5	Com	7
+7	6	Ca Nuong	8
+8	5	Panang Curry	1
+8	6.5	Seafood Medley	2
+8	5	Cashew Chicken	3
+8	8	Ginger Chicken	4
+8	6	Crispy Duck	5
+8	7	Pad Prik	6
+8	9	Drunken Halibut	7
+8	7	Spicy Chicken basil	8
 \.
 
 
@@ -255,7 +320,7 @@ Thai Bloom	Thai	Lunch-Dinner	1234 N Magy St.	$$$	8
 
 
 --
--- Name: customerdetails_pkey; Type: CONSTRAINT; Schema: public; Owner: Guest; Tablespace: 
+-- Name: customerdetails_pkey; Type: CONSTRAINT; Schema: public; Owner: Guest
 --
 
 ALTER TABLE ONLY customerdetails
@@ -263,7 +328,7 @@ ALTER TABLE ONLY customerdetails
 
 
 --
--- Name: finalorders_pkey; Type: CONSTRAINT; Schema: public; Owner: Guest; Tablespace: 
+-- Name: finalorders_pkey; Type: CONSTRAINT; Schema: public; Owner: Guest
 --
 
 ALTER TABLE ONLY finalorders
@@ -271,7 +336,7 @@ ALTER TABLE ONLY finalorders
 
 
 --
--- Name: ordereditems_pkey; Type: CONSTRAINT; Schema: public; Owner: Guest; Tablespace: 
+-- Name: ordereditems_pkey; Type: CONSTRAINT; Schema: public; Owner: Guest
 --
 
 ALTER TABLE ONLY ordereditems
