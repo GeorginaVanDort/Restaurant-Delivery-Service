@@ -2,12 +2,16 @@
 -- PostgreSQL database dump
 --
 
+-- Dumped from database version 9.5.4
+-- Dumped by pg_dump version 9.5.4
+
 SET statement_timeout = 0;
 SET lock_timeout = 0;
 SET client_encoding = 'UTF8';
 SET standard_conforming_strings = on;
 SET check_function_bodies = false;
 SET client_min_messages = warning;
+SET row_security = off;
 
 --
 -- Name: plpgsql; Type: EXTENSION; Schema: -; Owner: 
@@ -30,7 +34,7 @@ SET default_tablespace = '';
 SET default_with_oids = false;
 
 --
--- Name: customers; Type: TABLE; Schema: public; Owner: Guest; Tablespace: 
+-- Name: customers; Type: TABLE; Schema: public; Owner: Guest
 --
 
 CREATE TABLE customers (
@@ -65,7 +69,7 @@ ALTER SEQUENCE customers_id_seq OWNED BY customers.id;
 
 
 --
--- Name: menuitems; Type: TABLE; Schema: public; Owner: Guest; Tablespace: 
+-- Name: menuitems; Type: TABLE; Schema: public; Owner: Guest
 --
 
 CREATE TABLE menuitems (
@@ -79,7 +83,7 @@ CREATE TABLE menuitems (
 ALTER TABLE menuitems OWNER TO "Guest";
 
 --
--- Name: orderitems; Type: TABLE; Schema: public; Owner: Guest; Tablespace: 
+-- Name: orderitems; Type: TABLE; Schema: public; Owner: Guest
 --
 
 CREATE TABLE orderitems (
@@ -114,7 +118,7 @@ ALTER SEQUENCE orderitems_id_seq OWNED BY orderitems.id;
 
 
 --
--- Name: orders; Type: TABLE; Schema: public; Owner: Guest; Tablespace: 
+-- Name: orders; Type: TABLE; Schema: public; Owner: Guest
 --
 
 CREATE TABLE orders (
@@ -148,7 +152,7 @@ ALTER SEQUENCE orders_id_seq OWNED BY orders.id;
 
 
 --
--- Name: restaurants; Type: TABLE; Schema: public; Owner: Guest; Tablespace: 
+-- Name: restaurants; Type: TABLE; Schema: public; Owner: Guest
 --
 
 CREATE TABLE restaurants (
@@ -242,11 +246,19 @@ SELECT pg_catalog.setval('orders_id_seq', 1, false);
 --
 
 COPY restaurants (name, cuisine, hours, address, price, id) FROM stdin;
+Happy Panda	Chinese	Lunch-Dinner	1234 N Wilcox Rd	$$	1
+Casa Lola	Mexican	Lunch-Dinner	1234 N Homer St.	$$	2
+Subs Station	American	Lunch-Dinner	1234 N Marge St.	$	3
+DU KUH BEE	Chinese	Lunch-Dinner	1234 N Bart St.	$$	4
+Decarli	Itallian	Lunch-Dinner	1234 N lisa St.	$$$	5
+Swagat	Indian	Lunch-Dinner	1234 N Magy St.	$$$	6
+Pho Van	Vietnamese	Lunch-Dinner	1234 N Magy St.	$	7
+Thai Bloom	Thai	Lunch-Dinner	1234 N Magy St.	$$$	8
 \.
 
 
 --
--- Name: customers_pkey; Type: CONSTRAINT; Schema: public; Owner: Guest; Tablespace: 
+-- Name: customers_pkey; Type: CONSTRAINT; Schema: public; Owner: Guest
 --
 
 ALTER TABLE ONLY customers
@@ -254,7 +266,7 @@ ALTER TABLE ONLY customers
 
 
 --
--- Name: orderitems_pkey; Type: CONSTRAINT; Schema: public; Owner: Guest; Tablespace: 
+-- Name: orderitems_pkey; Type: CONSTRAINT; Schema: public; Owner: Guest
 --
 
 ALTER TABLE ONLY orderitems
@@ -262,7 +274,7 @@ ALTER TABLE ONLY orderitems
 
 
 --
--- Name: orders_pkey; Type: CONSTRAINT; Schema: public; Owner: Guest; Tablespace: 
+-- Name: orders_pkey; Type: CONSTRAINT; Schema: public; Owner: Guest
 --
 
 ALTER TABLE ONLY orders

@@ -28,14 +28,23 @@ public class App {
       Map<String, Object> model = new HashMap<String, Object>();
       Restaurant newRestaurant = new Restaurant("happyHouse", "Chinese", "Late Night", "ChinaTown", "$$");
       newRestaurant.save();
+      // MenuItem restaurantMenu = new MenuItem.find(MenuItem.all().getId())
       model.put("restaurant", newRestaurant);
+      model.put("menuitems", MenuItem.all());
       model.put("template", "templates/Orderforms.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
-
-
-
-
   }
+}
+
+
+
+
+
+
+
+
+
+
 }
