@@ -106,8 +106,8 @@ CREATE TABLE orders (
     id integer NOT NULL,
     menuid integer,
     quantity integer,
-    cusotmerid integer,
-    ordertime timestamp without time zone
+    ordertime timestamp without time zone,
+    customerid integer
 );
 
 
@@ -211,7 +211,7 @@ COPY customers (id, customername, phone) FROM stdin;
 -- Name: customers_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Guest
 --
 
-SELECT pg_catalog.setval('customers_id_seq', 228, true);
+SELECT pg_catalog.setval('customers_id_seq', 474, true);
 
 
 --
@@ -226,14 +226,14 @@ COPY menuitems (id, restaurantid, price, itemname) FROM stdin;
 -- Name: menuitems_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Guest
 --
 
-SELECT pg_catalog.setval('menuitems_id_seq', 1, false);
+SELECT pg_catalog.setval('menuitems_id_seq', 19, true);
 
 
 --
 -- Data for Name: orders; Type: TABLE DATA; Schema: public; Owner: Guest
 --
 
-COPY orders (id, menuid, quantity, cusotmerid, ordertime) FROM stdin;
+COPY orders (id, menuid, quantity, ordertime, customerid) FROM stdin;
 \.
 
 
@@ -248,7 +248,7 @@ SELECT pg_catalog.setval('orders_id_seq', 1, false);
 -- Name: restaurant_id_seq; Type: SEQUENCE SET; Schema: public; Owner: Guest
 --
 
-SELECT pg_catalog.setval('restaurant_id_seq', 923, true);
+SELECT pg_catalog.setval('restaurant_id_seq', 2390, true);
 
 
 --
