@@ -1,0 +1,97 @@
+restaurants
+
+name     |  cuisine   |    hours     |     address      | price | id
+--------------+------------+--------------+------------------+-------+----
+Happy Panda  | Chinese    | Lunch-Dinner | 1234 N Wilcox Rd | $$    |  1
+Casa Lola    | Mexican    | Lunch-Dinner | 1234 N Homer St. | $$    |  2
+Subs Station | American   | Lunch-Dinner | 1234 N Marge St. | $     |  3
+DU KUH BEE   | Chinese    | Lunch-Dinner | 1234 N Bart St.  | $$    |  4
+Decarli      | Itallian   | Lunch-Dinner | 1234 N lisa St.  | $$$   |  5
+Swagat       | Indian     | Lunch-Dinner | 1234 N Magy St.  | $$$   |  6
+Pho Van      | Vietnamese | Lunch-Dinner | 1234 N Magy St.  | $     |  7
+Thai Bloom   | Thai       | Lunch-Dinner | 1234 N Magy St.  | $$$   |  8
+
+
+menuitmes
+
+
+in
+restaurantid | price | itemname | id
+--------------+-------+----------+----
+
+insert into menuitems (restaurantid, price, itemname, id) VALUES
+
+(1, 5.75, 'Crab Cream', 1),
+(1, 3.25, 'Spring Rolls', 2),
+(1, 3.75, 'Fried Wonton', 3),
+(1, 6.75, 'B.B.Q Pork', 4),
+(1, 5.50, 'Pot Sticker', 5),
+(1, 5.50, 'French Fries', 6),
+(1, 5.50, 'Fries Prawns', 7),
+(1, 10.50, 'Wonton Soup', 9),
+(1, 7.75, 'Veggies Roll', 9);
+
+
+(2, 5.00, 'Ensalada de Jicama', 1),
+(2, 5.00, 'Tostadaas de Tinga', 2),
+(2, 5.00, 'Nachos', 3),
+(2, 5.00, 'Taquitos de Pollo', 4),
+(2, 5.00, 'Two Tacos', 5),
+
+(3, 6.00, 'Deluxe', 1),
+(3, 5.00, 'French Dip', 2),
+(3, 5.00, 'Tuna', 3),
+(3, 5.00, 'Egg Salad', 4),
+(3, 5.00, 'MeatBall', 5),
+(3, 5.00, 'Bbq Beef', 6),
+(3, 5.00, 'Hawaiian', 7),
+(3, 5.00, 'Reugen', 8),
+(3, 5.00, 'Seafood', 9),
+
+(4, 6.00, 'Korean Bbq', 1),
+(4, 5.00, 'Grilled Meat', 2),
+(4, 5.00, 'Salad', 3),
+(4, 5.00, 'Egg Salad', 4),
+(4, 5.00, 'House special Soup', 5),
+(4, 5.00, 'Korean special bbq', 6),
+
+
+(5, 3.00, 'Truffled', 1),
+(5, 3.50, 'French Fries', 2),
+(5, 5.00, 'MeatBalls', 3),
+(5, 5.00, 'Caesar Salad', 4),
+(5, 6.00, 'Prosciutto panini', 5),
+(5, 7.00, 'Decarli burger', 6),
+(5, 5.00, 'Pizzetta', 7),
+(5, 6.00, 'Short rib sandwich', 8),
+
+
+(6, 3.00, 'Methu Vada', 1),
+(6, 3.50, 'Rava Dosa', 2),
+(6, 5.00, 'Plate idli', 3),
+(6, 5.00, 'Rava Masala', 4),
+(6, 6.00, 'Plain Dosa', 5),
+(6, 7.00, 'Andhra Dosa', 6),
+(6, 5.00, 'Onion Dosa', 7),
+(6, 6.00, 'Utappam', 8),
+
+(7, 3.00, 'An Choi', 1),
+(7, 3.50, 'Goi', 2),
+(7, 5.00, 'Rice Noodle', 3),
+(7, 5.00, 'Egg Noodle', 4),
+(7, 6.00, 'Pho', 5),
+(7, 7.00, 'Cuon', 6),
+(7, 5.00, 'Com', 7),
+(7, 6.00, 'Ca Nuong', 8),
+
+(8, 5.00, 'Panang Curry', 1),
+(8, 6.50, 'Seafood Medley', 2),
+(8, 5.00, 'Cashew Chicken', 3),
+(8, 8.00, 'Ginger Chicken', 4),
+(8, 6.00, 'Crispy Duck', 5),
+(8, 7.00, 'Pad Prik', 6),
+(8, 9.00, 'Drunken Halibut', 7),
+(8, 7.00, 'Spicy Chicken basil', 8),
+
+
+}
