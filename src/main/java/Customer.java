@@ -30,7 +30,7 @@ public class Customer {
     return id;
   }
 
-  public int getAddress(){
+  public String getAddress(){
     return address;
   }
 
