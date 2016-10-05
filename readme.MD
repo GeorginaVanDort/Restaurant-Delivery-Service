@@ -18,7 +18,7 @@ Local food delivery service.
 
 
 #### Database Diagram:
-![database diagram](screenshot2.png)
+![database diagram](schema.png)
 
 #### Technical Specifications:
 ![Specifications diagram](picture here)
