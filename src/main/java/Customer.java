@@ -13,7 +13,7 @@ public class Customer {
   private String address;
   private int id;
 
-  public Customer(String customerName, String phone, String address){
+  public Customer(String customerName, String phone, String address) {
     this.customerName = customerName;
     this.phone = phone;
     this.address = address;
