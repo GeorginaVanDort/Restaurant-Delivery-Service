@@ -26,11 +26,9 @@ public class App {
 
     get("/orderform", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
+      model.put("restaurant", Restaurant.all());
       model.put("template", "templates/Orderforms.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
-
-
-    
   }
 }
