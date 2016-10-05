@@ -10,20 +10,28 @@ import java.util.TimerTask;
 public class Customer {
   private String customerName;
   private String phone;
+  private String address;
   private int id;
 
-  public Customer(String customerName, String phone){
+  public Customer(String customerName, String phone, String address){
     this.customerName = customerName;
     this.phone = phone;
+    this.address = address;
   }
   public String getCustomerName(){
     return customerName;
   }
+
   public String getPhone(){
     return phone;
   }
+
   public int getId(){
     return id;
+  }
+
+  public int getAddress(){
+    return address;
   }
 
 
@@ -51,6 +59,7 @@ public class Customer {
     this.id = (int) con.createQuery(sql, true)
       .addParameter("customername", this.customerName)
       .addParameter("phone", this.phone)
+      .addParameter("address", this.address)
       .executeUpdate()
       .getKey();
     }
