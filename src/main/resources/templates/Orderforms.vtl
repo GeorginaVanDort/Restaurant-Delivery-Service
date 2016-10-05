@@ -34,25 +34,6 @@
 
     <div class="container">
 
-        <!-- <div class="row">
-            <div class="box">
-                <div class="col-lg-12">
-                    <hr>
-                    <h2 class="intro-text text-center">
-                        <strong> Our Services</strong>
-                    </h2>
-                    <hr>
-                </div>
-                <div class="col-md-6">
-                    <img class="img-responsive img-border-left" src="img/index_services.jpeg" alt="">
-                </div>
-                <div class="col-md-6">
-                    <p>Order your local restaurant favorties using our site. Simply choose your restaurant, pick your items, and place your order! It's that simple!</p>
-                </div>
-                <div class="clearfix"></div>
-            </div>
-        </div> -->
-
         <div class="row">
             <div class="box">
                 <div class="col-lg-12">
@@ -64,12 +45,12 @@
                     <hr>
                 </div>
                 <div class="col-sm text-left">
-                  <!-- <a href="/happypanda.vtl"> -->
-                    <!-- <img class="img-responsive" src="img/happypanda.jpeg" alt=""> -->
+
                   <form class="" action="index.html" method="post">
                     <ul>
-                      <h3>  $restaurant.getItem()
-                          |   <small>Price:$restaurant.getPrice()</small>
+                      #foreach($menuitem in $menuitems)
+                      <h3>  $menuitem.getItem()
+                      |   <small>Price:$menuitem.getPrice()</small>
                           <!-- <div class="text-right"> -->
                             | <select class="selectpicker" name="" position="relative" display="inline-block" height="15px" width="10%">
                               <option>none</option>
@@ -79,6 +60,7 @@
                             </select>
                           <!-- </div> -->
                       </h3>
+                      #end
                     <!-- </a> -->
                     </ul>
                     <div class="col-lg-12">
@@ -91,47 +73,7 @@
                     </div>
                   </form>
                  </div>
-                <!-- <div class="col-sm-4 text-center"><a href="/Casa Lola"><img class="img-responsive" src="img/casalola.jpg" alt="">
-                  <h3>Casa Lola
-                    <input type="button" name="name" value="">
-                      <small>Mexican Cuisine</small>
-                  </h3></a>
-                </div> -->
-                <!-- <div class="col-sm-4 text-center"><a href="/Subs"><img class="img-responsive" src="img/subststation.jpg" alt="">
-                  <h3>Subs Station
-                      <small>American Cuisine</small>
-                  </h3></a>
-                </div>
-                <div class="col-sm-4 text-center"><a href="/Oasis"><img class="img-responsive" src="img/oasis.jpg" alt="">
-                  <h3>Oasis
-                      <small>Middle Eastern Cuisine</small>
-                  </h3></a>
-                </div>
-                <div class="col-sm-4 text-center"><a href="/Du Kuh Bee"><img class="img-responsive" src="img/dukuhbee.jpg" alt="">
-                  <h3>Du Kuh Bee
-                      <small>Chinese Cuisine</small>
-                  </h3></a>
-                </div>
-                <div class="col-sm-4 text-center"><a href="/Decarlipage"><img class="img-responsive" src="img/decarli.jpg" alt="">
-                  <h3>Decarli
-                      <small>Italian Cuisine</small>
-                  </h3></a>
-                </div>
-                <div class="col-sm-4 text-center"><a href="/Swagat"><img class="img-responsive" src="img/swagat2.jpg" alt="">
-                <h3>Swagat
-                    <small>Indian Cuisine</small>
-                </h3></a>
-                </div>
-                <div class="col-sm-4 text-center"><a href="/Pho Van"><img class="img-responsive" src="img/phovan.jpg" alt="">
-                <h3>Pho Van
-                    <small>Vietnamese Cuisine</small>
-                </h3></a>
-                </div>
-                <div class="col-sm-4 text-center"><a href="/Thai Bloom"><img class="img-responsive" src="img/thaibloom.jpg" alt="">
-                <h3>Thai Bloom!
-                    <small>Thai Cuisine</small>
-                </h3></a>
-                </div> -->
+
                 <div class="clearfix"></div>
             </div>
         </div>
