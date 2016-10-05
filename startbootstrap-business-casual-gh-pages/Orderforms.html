@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Home - Restaurant Food Delivery - Portland OR</title>
+
+    <!-- Bootstrap Core CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS -->
+    <link href="css/business-casual.css" rel="stylesheet">
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Slab:100,300,400,600,700,100italic,300italic,400italic,600italic,700italic" rel="stylesheet" type="text/css">
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+    <div class="brand">Restaurant Delivery Service</div>
+    <div class="address-bar">1234 Stark Street, Portland, OR 92045 | 123.456.7890</div>
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-default" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar">Apple</span>
+                    <span class="icon-bar">Pear</span>
+                    <span class="icon-bar">Watermelon</span>
+                </button>
+                <!-- navbar-brand is hidden on larger screens, but visible when the menu is collapsed -->
+                <a class="navbar-brand" href="index.html">Restaurant Delivery Service</a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a href="index.html">Home</a>
+                    </li>
+                    <li>
+                        <a href="order.html">Order</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <div class="container">
+
+        <!-- <div class="row">
+            <div class="box">
+                <div class="col-lg-12">
+                    <hr>
+                    <h2 class="intro-text text-center">
+                        <strong> Our Services</strong>
+                    </h2>
+                    <hr>
+                </div>
+                <div class="col-md-6">
+                    <img class="img-responsive img-border-left" src="img/index_services.jpeg" alt="">
+                </div>
+                <div class="col-md-6">
+                    <p>Order your local restaurant favorties using our site. Simply choose your restaurant, pick your items, and place your order! It's that simple!</p>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </div> -->
+
+        <div class="row">
+            <div class="box">
+                <div class="col-lg-12">
+                    <hr>
+                    <h2 class="intro-text text-center">
+                      $restaurant.getName() <br>
+                        <strong>Menu </strong>
+                    </h2>
+                    <hr>
+                </div>
+                <div class="col-sm text-left">
+                  <!-- <a href="/happypanda.vtl"> -->
+                    <!-- <img class="img-responsive" src="img/happypanda.jpeg" alt=""> -->
+                  <form class="" action="index.html" method="post">
+                    <ul>
+                      <h3>  $restaurant.getItem()
+                          |   <small>Price:$restaurant.getPrice()</small>
+                          <!-- <div class="text-right"> -->
+                            | <select class="selectpicker" name="" position="relative" display="inline-block" height="15px" width="10%">
+                              <option>none</option>
+                              <option>1</option>
+                              <option>2</option>
+                              <option>3</option>
+                            </select>
+                          <!-- </div> -->
+                      </h3>
+                    <!-- </a> -->
+                    </ul>
+                    <div class="col-lg-12">
+                      <hr>
+                      <h2 class="intro-text text-right">
+                        Place your order |
+                          <strong><button type="Submit" name="button">Submit</button> </strong>
+                      </h2>
+                      <hr>
+                    </div>
+                  </form>
+                 </div>
+                <!-- <div class="col-sm-4 text-center"><a href="/Casa Lola"><img class="img-responsive" src="img/casalola.jpg" alt="">
+                  <h3>Casa Lola
+                    <input type="button" name="name" value="">
+                      <small>Mexican Cuisine</small>
+                  </h3></a>
+                </div> -->
+                <!-- <div class="col-sm-4 text-center"><a href="/Subs"><img class="img-responsive" src="img/subststation.jpg" alt="">
+                  <h3>Subs Station
+                      <small>American Cuisine</small>
+                  </h3></a>
+                </div>
+                <div class="col-sm-4 text-center"><a href="/Oasis"><img class="img-responsive" src="img/oasis.jpg" alt="">
+                  <h3>Oasis
+                      <small>Middle Eastern Cuisine</small>
+                  </h3></a>
+                </div>
+                <div class="col-sm-4 text-center"><a href="/Du Kuh Bee"><img class="img-responsive" src="img/dukuhbee.jpg" alt="">
+                  <h3>Du Kuh Bee
+                      <small>Chinese Cuisine</small>
+                  </h3></a>
+                </div>
+                <div class="col-sm-4 text-center"><a href="/Decarlipage"><img class="img-responsive" src="img/decarli.jpg" alt="">
+                  <h3>Decarli
+                      <small>Italian Cuisine</small>
+                  </h3></a>
+                </div>
+                <div class="col-sm-4 text-center"><a href="/Swagat"><img class="img-responsive" src="img/swagat2.jpg" alt="">
+                <h3>Swagat
+                    <small>Indian Cuisine</small>
+                </h3></a>
+                </div>
+                <div class="col-sm-4 text-center"><a href="/Pho Van"><img class="img-responsive" src="img/phovan.jpg" alt="">
+                <h3>Pho Van
+                    <small>Vietnamese Cuisine</small>
+                </h3></a>
+                </div>
+                <div class="col-sm-4 text-center"><a href="/Thai Bloom"><img class="img-responsive" src="img/thaibloom.jpg" alt="">
+                <h3>Thai Bloom!
+                    <small>Thai Cuisine</small>
+                </h3></a>
+                </div> -->
+                <div class="clearfix"></div>
+            </div>
+        </div>
+
+    </div>
+    <!-- /.container -->
+
+    <footer>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <p>Copyright &copy; Restaurant Food Delivery 2016</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+
+</html>
