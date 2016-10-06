@@ -8,15 +8,15 @@ public class DatabaseRule extends ExternalResource {
   DB.sql2o = new Sql2o("jdbc:postgresql://localhost:5432/food_delivery_test", null, null);
   }
 
-  @Override
-  protected void after() {
-    try(Connection con = DB.sql2o.open()) {
-      String deleteMenuItemsQuery = "DELETE FROM menuitems *;";
-      String deleteCustomersQuery = "DELETE FROM customerdetails *;";
-      String deleteRestaurantsQuery = "DELETE FROM restaurants *;";
-      con.createQuery(deleteRestaurantsQuery).executeUpdate();
-      con.createQuery(deleteMenuItemsQuery).executeUpdate();
-      con.createQuery(deleteCustomersQuery).executeUpdate();
-    }
-  }
+  // @Override
+  // protected void after() {
+  //   try(Connection con = DB.sql2o.open()) {
+  //     String deleteMenuItemsQuery = "DELETE FROM menuitems *;";
+  //     String deleteCustomersQuery = "DELETE FROM customerdetails *;";
+  //     String deleteRestaurantsQuery = "DELETE FROM restaurants *;";
+  //     con.createQuery(deleteRestaurantsQuery).executeUpdate();
+  //     con.createQuery(deleteMenuItemsQuery).executeUpdate();
+  //     con.createQuery(deleteCustomersQuery).executeUpdate();
+  //   }
+  // }
 }

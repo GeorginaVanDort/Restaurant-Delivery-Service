@@ -59,10 +59,9 @@ public class App {
 
     get("/orderform", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
-      Restaurant newRestaurant = new Restaurant("happyHouse", "Chinese", "Late Night", "ChinaTown", "$$", 2);
-      newRestaurant.save();
-      // MenuItem restaurantMenu = new MenuItem.find(MenuItem.all().getId())
-      model.put("restaurant", newRestaurant);
+
+      List<MenuItem> restaurantMenu = MenuItem.findByRestaurant(2);
+      model.put("restaurant", restaurantMenu);
       model.put("menuitems", MenuItem.all());
       model.put("template", "templates/Orderforms.vtl");
       return new ModelAndView(model, layout);
