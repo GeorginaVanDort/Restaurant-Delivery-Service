@@ -90,14 +90,14 @@ public class Order {
     }
   }
 
-  public List<Order> getOrdersByCustomer() {
-    try(Connection con = DB.sql2o.open()) {
-      String sql = "SELECT tags.* FROM blogs JOIN blog_tag ON (blogs.id = blog_tag.blog_id) JOIN tags ON (blog_tag.tag_id = tags.id) WHERE blogs.id = :blog_id;";
-      return con.createQuery(sql)
-      .addParameter("blog_id", this.id)
-      .executeAndFetch(Tag.class);
-    }
-  }
+  // public List<Order> getOrderedItemsByCustomer() {
+  //   try(Connection con = DB.sql2o.open()) {
+  //     String sql = "SELECT ordereditems.* FROM blogs JOIN blog_tag ON (blogs.id = blog_tag.blog_id) JOIN tags ON (blog_tag.tag_id = tags.id) WHERE blogs.id = :blog_id;";
+  //     return con.createQuery(sql)
+  //     .addParameter("blog_id", this.id)
+  //     .executeAndFetch(Tag.class);
+  //   }
+  // }
 
 
   public void delete() {
