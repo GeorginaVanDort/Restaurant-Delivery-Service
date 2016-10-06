@@ -72,12 +72,33 @@ public class Order {
     try(Connection con = DB.sql2o.open()) {
       String sql = "SELECT * FROM ordereditems where id=:id";
       Order order = con.createQuery(sql)
-        .addParameter("id", id)
-        .throwOnMappingFailure(false)
-        .executeAndFetchFirst(Order.class);
+      .addParameter("id", id)
+      .throwOnMappingFailure(false)
+      .executeAndFetchFirst(Order.class);
       return order;
     }
   }
+
+  public void saveFinalOrder(Customer customer) {
+    try(Connection con = DB.sql2o.open()) {
+      String joinQuery = "insert into finalorders (ordereditems_id, customerdetails_id) values (:ordereditems_id, :customerdetails_id);";
+      con.createQuery(joinQuery)
+      .addParameter("id", this.getId())
+      .addParameter("customerdetails_id", customer.getId())
+      .addParameter("ordereditems_id", this.getId())
+      .executeUpdate();
+    }
+  }
+
+  public List<Order> getOrdersByCustomer() {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "SELECT tags.* FROM blogs JOIN blog_tag ON (blogs.id = blog_tag.blog_id) JOIN tags ON (blog_tag.tag_id = tags.id) WHERE blogs.id = :blog_id;";
+      return con.createQuery(sql)
+      .addParameter("blog_id", this.id)
+      .executeAndFetch(Tag.class);
+    }
+  }
+
 
   public void delete() {
       try(Connection con = DB.sql2o.open()) {
@@ -87,6 +108,7 @@ public class Order {
           .executeUpdate();
       }
     }
+
 
   public void update(int menuid, int quantity, int customerid) {
     try (Connection con = DB.sql2o.open()){
@@ -99,7 +121,6 @@ public class Order {
       .executeUpdate();
     }
   }
-
 
 
   // public List<Order> getOrdersByCustomerID() {

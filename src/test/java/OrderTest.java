@@ -84,6 +84,11 @@ public class OrderTest {
     assertEquals(null, Order.find(testOrder.getId()));
   }
 
+  @Test
+  public void saveFinalOrder_addsOrderToFinalOrders_true(){
+    
+  }
+
   // @Test
   // public void update_updatesClientDescription_true() {
   //   testOrder.update(3, 2, 1);
