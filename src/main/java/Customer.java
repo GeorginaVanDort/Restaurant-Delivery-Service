@@ -82,4 +82,17 @@ public class Customer {
       return customer;
     }
   }
+
+  // public List<Order> getOrdersByCustomerID(int customerId) {
+  //   try(Connection con = DB.sql2o.open()) {
+  //     String sql = "SELECT ordereditems.* FROM customerdetails
+  //     JOIN finalorders ON (customerdetails.id = finalorders.customerdetails_id)
+  //     JOIN ordereditems ON (finalorders.ordereditems_id = ordereditems.id)
+  //     WHERE customerdetails.id = :customerId";
+  //     return con.createQuery(sql)
+  //       .addParameter("customerId", this.id)
+  //       .executeAndFetch(Blog.class);
+  //   }
+  // }
+
 }

@@ -90,16 +90,6 @@ public class Order {
     }
   }
 
-  // public List<Order> getOrderedItemsByCustomer() {
-  //   try(Connection con = DB.sql2o.open()) {
-  //     String sql = "SELECT ordereditems.* FROM blogs JOIN blog_tag ON (blogs.id = blog_tag.blog_id) JOIN tags ON (blog_tag.tag_id = tags.id) WHERE blogs.id = :blog_id;";
-  //     return con.createQuery(sql)
-  //     .addParameter("blog_id", this.id)
-  //     .executeAndFetch(Tag.class);
-  //   }
-  // }
-
-
   public void delete() {
       try(Connection con = DB.sql2o.open()) {
         String sql = "delete from ordereditems where id = :id;";
@@ -122,17 +112,9 @@ public class Order {
     }
   }
 
+  
 
-  // public List<Order> getOrdersByCustomerID() {
-  //   try(Connection con = DB.sql2o.open()) {
-  //     String sql = "SELECT blogs.* FROM tags JOIN blog_tag ON (tags.id = blog_tag.tag_id) JOIN blogs ON (blog_tag.blog_id = blogs.id) WHERE tags.id = :tag_id";
-  //     return con.createQuery(sql)
-  //       .addParameter("tag_id", this.id)
-  //       .executeAndFetch(Blog.class);
-  //   }
-  // }
 
-//
 
 
 

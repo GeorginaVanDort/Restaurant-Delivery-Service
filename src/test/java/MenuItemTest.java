@@ -20,6 +20,8 @@ public class MenuItemTest {
       testMenuItem.save();
       firstMenuItem = new MenuItem (2, 11.50, "Chow Mein", 2);
       firstMenuItem.save();
+      secondMenuItem = new MenuItem (3, 20.50, "Peking Duck", 3);
+      secondMenuItem.save();
     }
 
 
@@ -59,6 +61,13 @@ public class MenuItemTest {
    @Test
    public void delete_deletesMenuItem_true(){
      firstMenuItem.delete();
+     testMenuItem.delete();
+     secondMenuItem.delete();
      assertEquals(null, Restaurant.find(firstMenuItem.getId()));
+   }
+
+   @Test
+   public void findByRestaurant_fetchesAllMenuItemsWithSameResID_true(){
+     assertEquals(MenuItem.findByRestaurant(2), firstMenuItem);
    }
 }
