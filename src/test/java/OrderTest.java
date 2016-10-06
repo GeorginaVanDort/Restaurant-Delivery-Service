@@ -72,8 +72,8 @@ public class OrderTest {
 
   @Test
   public void find_returnsOrderWithCorrectId_True() {
-    Order savedOrder = Order.all().get(0);
-    assertEquals(testOrder.getId(), savedOrder.getId());
+    int id = testOrder.getId();
+    assertTrue(testOrder.equals(Order.find(id)));
   }
 
   @Test
