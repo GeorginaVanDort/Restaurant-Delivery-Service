@@ -1,78 +1,64 @@
-// import org.junit.*;
-// import static org.junit.Assert.*;
-// import org.sql2o.*;
-// import java.util.Arrays;
-// import java.util.List;
-// import java.util.ArrayList;
-// import java.math.*;
-//
-// public class MenuItemTest {
-//
-//   @Rule
-//     public DatabaseRule database = new DatabaseRule();
-//
-//   MenuItem menuitem = new MenuItem("KungPao Chicken", 1, 12.50);
-//
-//   @Test
-//     public void menuItem_instantiatesCorrectly_true(){
-//       MenuItem testMenuItem = menuitem;
-//       assertEquals(true, testMenuItem instanceof MenuItem);
-//     }
-//
-//   @Test
-//     public void save_savesIntoDatabase_true() {
-//       MenuItem testMenuItem = menuitem;
-//       testMenuItem.save();
-//       assertTrue(MenuItem.all().get(0).equals(testMenuItem));
-//     }
-//
-//   @Test
-//     public void equals_returnsTrueIfItemNamesAretheSame() {
-//        MenuItem firstMenuItem = menuitem;
-//        MenuItem secondMenuItem = menuitem;
-//        assertTrue(firstMenuItem.equals(secondMenuItem));
-//      }
-//
-//   @Test
-//     public void all_returnsAllInstancesOfMenuItem_true() {
-//        MenuItem firstMenuItem = menuitem;
-//        firstMenuItem.save();
-//        MenuItem secondMenuItem = new MenuItem("Burger", 2, 12.50);
-//        secondMenuItem.save();
-//        assertEquals(true, MenuItem.all().get(0).equals(firstMenuItem));
-//        assertEquals(true, MenuItem.all().get(1).equals(secondMenuItem));
-//    }
-//
-//   @Test
-//     public void save_assignsIdToObject_True() {
-//        MenuItem testMenuItem = menuitem;
-//        testMenuItem.save();
-//        MenuItem savedMenuItem = MenuItem.all().get(0);
-//        assertEquals(testMenuItem.getId(), savedMenuItem.getId());
-//    }
-//
-//   @Test
-//    public void find_returnsMenuItemWithSameId_secondMenuItem() {
-//        MenuItem firstMenuItem = menuitem;
-//        firstMenuItem.save();
-//        MenuItem secondMenuItem = menuitem;
-//        secondMenuItem.save();
-//        assertEquals(MenuItem.find(secondMenuItem.getId()), secondMenuItem);
-//    }
-//
-//    @Test
-//    public void delete_deletesMenuItem_true(){
-//      MenuItem firstMenuItem = menuitem;
-//      firstMenuItem.save();
-//      firstMenuItem.delete();
-//      assertEquals(null, Restaurant.find(firstMenuItem.getId()));
-//    }
-//
-//
-//
-//
-//
-//
-//
-//
-// }
+import org.junit.*;
+import static org.junit.Assert.*;
+import org.sql2o.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.ArrayList;
+import java.math.*;
+
+public class MenuItemTest {
+  private MenuItem testMenuItem;
+  private MenuItem firstMenuItem;
+  private MenuItem secondMenuItem;
+
+    @Rule
+    public DatabaseRule database = new DatabaseRule();
+
+    @Before
+    public void initialize() {
+      testMenuItem = new MenuItem (1, 12.50, "KungPao Chicken", 1);
+      testMenuItem.save();
+      firstMenuItem = new MenuItem (2, 11.50, "Chow Mein", 2);
+      firstMenuItem.save();
+    }
+
+
+  @Test
+    public void menuItem_instantiatesCorrectly_true(){
+      assertEquals(true, testMenuItem instanceof MenuItem);
+    }
+
+  @Test
+    public void save_savesIntoDatabase_true() {
+      assertEquals(true, testMenuItem.getId()>0);
+    }
+
+  @Test
+    public void equals_returnsTrueIfItemNamesAretheSame() {
+      assertTrue(testMenuItem.equals(testMenuItem));
+     }
+
+  @Test
+    public void all_returnsAllInstancesOfMenuItem_true() {
+       secondMenuItem = new MenuItem(2, 12.50, "Burger", 2);
+       assertEquals(true, MenuItem.all().size() > 0);
+
+   }
+
+  @Test
+    public void save_assignsIdToObject_True() {
+      MenuItem savedMenuItem = MenuItem.all().get(0);
+      assertEquals(testMenuItem.getId(), savedMenuItem.getId());
+   }
+
+  @Test
+   public void find_returnsMenuItemWithSameId_secondMenuItem() {
+       assertEquals(MenuItem.find(firstMenuItem.getId()), firstMenuItem);
+   }
+
+   @Test
+   public void delete_deletesMenuItem_true(){
+     firstMenuItem.delete();
+     assertEquals(null, Restaurant.find(firstMenuItem.getId()));
+   }
+}
