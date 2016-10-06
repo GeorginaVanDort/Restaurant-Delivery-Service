@@ -68,8 +68,6 @@ public class CustomerTest {
   }
     @Test
     public void saveOrderTime_recordsOrderTimeOfCreationInDatabase() {
-    //  Customer testCustomer = customer;
-    //  testCustomer.save();
      Timestamp savedCustomerOrderTime = Customer.find(testCustomer.getId()).getOrderTime();
      Timestamp rightNow = new Timestamp(new Date().getTime());
      assertEquals(rightNow.getDay(), savedCustomerOrderTime.getDay());

@@ -7,37 +7,32 @@ import java.math.*;
 
 public class Order {
   private int id;
-  private int menuid;
+  private int menuItemId;
   private int quantity;
-  private int customerid;
-  private Timestamp ordertime;
+  private double subtotal;
 
-
-  public Order(int menuid, int quantity, int customerid){
-    this.menuid = menuid;
+  public Order(int menuItemId, int quantity, double subtotal){
+    this.menuItemId = menuItemId;
     this.quantity = quantity;
-    this.customerid = customerid;
+    this.subtotal = subtotal;
   }
 
-  public int getMenuId(){
-    return menuid;
+  public int getMenuItemId(){
+    return menuItemId;
   }
 
   public int getQuantity(){
     return quantity;
   }
 
-  public int getCustomerId(){
-    return customerid;
-  }
-
-  public Timestamp getOrdertime(){
-    return ordertime;
-  }
-
   public int getId(){
     return id;
   }
+
+  public double getSubtotal(){
+    return subtotal;
+  }
+
 
   @Override
   public boolean equals(Object otherOrder){
@@ -45,26 +40,29 @@ public class Order {
      return false;
    } else {
      Order newOrder = (Order) otherOrder;
-     return this.getMenuId() == (newOrder.getMenuId()) &&
+     return this.getMenuItemId() == (newOrder.getMenuItemId()) &&
             this.getQuantity() == (newOrder.getQuantity()) &&
-            this.getCustomerId() == (newOrder.getCustomerId());
+            this.getSubtotal() == (newOrder.getSubtotal());
    }
  }
 
  public static List<Order> all() {
-    String sql = "SELECT * FROM orders";
+    String sql = "SELECT * FROM ordereditems";
     try(Connection con = DB.sql2o.open()) {
-     return con.createQuery(sql).executeAndFetch(Order.class);
+     return con.createQuery(sql)
+     .throwOnMappingFailure(false)
+     .executeAndFetch(Order.class);
     }
   }
 
   public void save() {
   try(Connection con = DB.sql2o.open()) {
-    String sql = "INSERT INTO orders (menuid, quantity, customerid, ordertime) VALUES (:menuid, :quantity, :customerid, now())";
+    String sql = "INSERT INTO ordereditems (menuitem_id, quantity, subtotal) VALUES (:menuItemId, :quantity, :subtotal)";
     this.id = (int) con.createQuery(sql, true)
-      .addParameter("menuid", this.menuid)
+      .addParameter("menuItemId", this.menuItemId)
       .addParameter("quantity", this.quantity)
-      .addParameter("customerid", this.customerid)
+      .addParameter("subtotal", this.subtotal)
+      .throwOnMappingFailure(false)
       .executeUpdate()
       .getKey();
     }
@@ -72,9 +70,10 @@ public class Order {
 
   public static Order find(int id) {
     try(Connection con = DB.sql2o.open()) {
-      String sql = "SELECT * FROM orders where id=:id";
+      String sql = "SELECT * FROM ordereditems where id=:id";
       Order order = con.createQuery(sql)
         .addParameter("id", id)
+        .throwOnMappingFailure(false)
         .executeAndFetchFirst(Order.class);
       return order;
     }
@@ -82,7 +81,7 @@ public class Order {
 
   public void delete() {
       try(Connection con = DB.sql2o.open()) {
-        String sql = "delete from orders where id = :id;";
+        String sql = "delete from ordereditems where id = :id;";
         con.createQuery(sql)
           .addParameter("id", this.id)
           .executeUpdate();
@@ -91,11 +90,11 @@ public class Order {
 
   public void update(int menuid, int quantity, int customerid) {
     try (Connection con = DB.sql2o.open()){
-      String sql = "update orders set menuid = :menuid, quantity = :quantity, customerid = :customerid where id=:id";
+      String sql = "update ordereditems set menuitem_id = :menuItemId, quantity = :quantity, subtotal = :subtotal where id=:id";
       con.createQuery(sql)
-      .addParameter("menuid", menuid)
+      .addParameter("menuItemId", menuItemId)
       .addParameter("quantity", quantity)
-      .addParameter("customerid", customerid)
+      .addParameter("subtotal", subtotal)
       .addParameter("id", id)
       .executeUpdate();
     }

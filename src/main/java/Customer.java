@@ -49,7 +49,7 @@ public class Customer {
    } else {
      Customer newCustomer = (Customer) otherCustomer;
      return this.getCustomerName().equals(newCustomer.getCustomerName()) &&
-            this.getCustomerPhone().equals(newCustomer.getCustomerPhone());
+     this.getCustomerPhone().equals(newCustomer.getCustomerPhone());
    }
  }
 
