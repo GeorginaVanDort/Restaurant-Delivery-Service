@@ -35,8 +35,8 @@ public class CustomerTest {
   }
 
   @Test
-  public void getPhone_customerInstantiatesWithPhone_String() {
-  assertEquals( "503-123-4567", testCustomer.getPhone());
+  public void getCustomerPhone_customerInstantiatesWithPhone_String() {
+  assertEquals( "503-123-4567", testCustomer.getCustomerPhone());
   }
 
   @Test
@@ -68,7 +68,7 @@ public class CustomerTest {
   }
     // @Test
     // public void saveOrderTime_recordsOrderTimeOfCreationInDatabase() {
-    //  Customer testCustomer = new Customer("Henry", "503-123-4567");
+    //    Customer testCustomer = customer;
     //  testCustomer.save();
     //  Timestamp savedCustomerOrderTime = Customer.find(testCustomer.getId()).getOrderTime();
     //  Timestamp rightNow = new Timestamp(new Date().getTime());

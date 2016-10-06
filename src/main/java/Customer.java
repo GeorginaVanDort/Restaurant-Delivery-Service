@@ -9,31 +9,38 @@ import java.util.TimerTask;
 
 public class Customer {
   private String customerName;
-  private String phone;
-  private String address;
+  private String customerPhone;
+  private String customerAddress;
+  private Timestamp orderTime;
   private int id;
 
-  public Customer(String customerName, String phone, String address) {
+
+  public Customer(String customerName, String customerPhone, String customerAddress){
     this.customerName = customerName;
-    this.phone = phone;
-    this.address = address;
+    this.customerPhone = customerPhone;
+    this.customerAddress = customerAddress;
+    this.orderTime = orderTime;
+
   }
   public String getCustomerName(){
     return customerName;
   }
 
-  public String getPhone(){
-    return phone;
+  public String getCustomerPhone(){
+    return customerPhone;
   }
 
   public int getId(){
     return id;
   }
 
-  public String getAddress(){
-    return address;
+  public String getCustomerAddress(){
+    return customerAddress;
   }
 
+  public Timestamp getOrderTime(){
+    return orderTime;
+  }
 
   @Override
   public boolean equals(Object otherCustomer){
@@ -42,12 +49,12 @@ public class Customer {
    } else {
      Customer newCustomer = (Customer) otherCustomer;
      return this.getCustomerName().equals(newCustomer.getCustomerName()) &&
-            this.getPhone().equals(newCustomer.getPhone());
+            this.getCustomerPhone().equals(newCustomer.getCustomerPhone());
    }
  }
 
  public static List<Customer> all() {
-    String sql = "SELECT * FROM customers";
+    String sql = "SELECT * FROM customerdetails";
     try(Connection con = DB.sql2o.open()) {
      return con.createQuery(sql).executeAndFetch(Customer.class);
     }
@@ -55,11 +62,11 @@ public class Customer {
 
   public void save() {
   try(Connection con = DB.sql2o.open()) {
-    String sql = "INSERT INTO customers (customername, phone) VALUES (:customername, :phone)";
+    String sql = "INSERT INTO customerdetails (customername, customerphone, customeraddress, ordertime) VALUES (:customerName, :customerPhone, :customerAddress, now())";
     this.id = (int) con.createQuery(sql, true)
       .addParameter("customername", this.customerName)
-      .addParameter("phone", this.phone)
-      .addParameter("address", this.address)
+      .addParameter("phone", this.customerPhone)
+      .addParameter("address", this.customerAddress)
       .executeUpdate()
       .getKey();
     }
@@ -67,7 +74,7 @@ public class Customer {
 
   public static Customer find(int id) {
     try(Connection con = DB.sql2o.open()) {
-      String sql = "SELECT * FROM customers where id=:id";
+      String sql = "SELECT * FROM customerdetails where id=:id";
       Customer customer = con.createQuery(sql)
         .addParameter("id", id)
         .executeAndFetchFirst(Customer.class);
