@@ -82,20 +82,20 @@ public class Restaurant {
     }
   }
 
-  public static List<Restaurant> allRes(){
-    String sql = "SELECT * FROM restaurants Where id = :restaurantid;"
-    try(Connection con = DB.sql2o.open()) {
-      return con.createQuery(sql)
-      .throwOnMappingFailure(false)
-      .executeAndFetch(Restaurant.class);
-    }
-  }
+  // public static List<Restaurant> allRes(){
+  //   String sql = "SELECT * FROM restaurants Where id = :restaurantid;"
+  //   try(Connection con = DB.sql2o.open()) {
+  //     return con.createQuery(sql)
+  //     .throwOnMappingFailure(false)
+  //     .executeAndFetch(Restaurant.class);
+  //   }
+  // }
 
   public static Restaurant find(int id) {
     try(Connection con = DB.sql2o.open()) {
-      String sql = "SELECT * FROM restaurants where id=:id";
+      String sql = "SELECT * FROM restaurants where id=:resid";
       Restaurant restaurant = con.createQuery(sql)
-        .addParameter("id", id)
+        .addParameter("resid", id)
         .executeAndFetchFirst(Restaurant.class);
         return restaurant;
     }

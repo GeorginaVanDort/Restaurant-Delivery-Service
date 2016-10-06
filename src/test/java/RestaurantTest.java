@@ -3,9 +3,9 @@ import static org.junit.Assert.*;
 import org.sql2o.*;
 
 public class RestaurantTest {
-  private Restaurant testRestaurant;
-  private Restaurant firstRestaurant;
-  private Restaurant secondRestaurant;
+  // private Restaurant testRestaurant;
+  // private Restaurant firstRestaurant;
+  // private Restaurant secondRestaurant;
 
   @Rule
   public DatabaseRule database = new DatabaseRule();
@@ -84,7 +84,7 @@ public class RestaurantTest {
   }
   @Test
   public void all_returnsAllInstancesOfRestaurant_true() {
-    Restaurant testRestaurant = new Restaurant("Swagat", "Indian", "11 am - 9 pm", "4325 SW 109th Ave, Beaverton, OR 97005", "$$", 1);
+    Restaurant testRestaurant = new Restaurant("Swagat", "Indian", "11 am - 9 pm", "4325 SW 109th Ave, Beaverton, OR 97005", "$$", 2);
     testRestaurant.save();
     assertEquals(true, Restaurant.all().size() > 0);
   }
@@ -106,20 +106,20 @@ public class RestaurantTest {
  //    assertEquals(testRestaurant.getResId(), 2);
  //  }
 
-  // @Test
-  // public void find_returnsRestaurantWithCorrectId_True() {
-  //   Restaurant testRestaurant = new Restaurant("Swagat", "Indian", "11 am - 9 pm", "4325 SW 109th Ave, Beaverton, OR 97005", "$$", 1);
-  //   testRestaurant.save();
-  //   assertEquals(Restaurant.find(testRestaurant.getResId()), testRestaurant);
-  // }
-  //
   @Test
-  public void delete_deletesRestaurants_true(){
-    testRestaurant.delete();
-    firstRestaurant.delete();
-    secondRestaurant.delete();
-    assertEquals(null, Restaurant.find(testRestaurant.getResId()));
+  public void find_returnsRestaurantWithCorrectId_True() {
+    Restaurant testRestaurant = new Restaurant("Swagat", "Indian", "11 am - 9 pm", "4325 SW 109th Ave, Beaverton, OR 97005", "$$", 3);
+    testRestaurant.save();
+    assertEquals(Restaurant.find(testRestaurant.getResId()).getPrice(), testRestaurant.getPrice());
   }
+
+  // @Test
+  // public void delete_deletesRestaurants_true(){
+  //   testRestaurant.delete();
+  //   firstRestaurant.delete();
+  //   secondRestaurant.delete();
+  //   assertEquals(null, Restaurant.find(testRestaurant.getResId()));
+  // }
   //
   // @Test
   // public void update_updatesClientDescription_true() {
