@@ -14,6 +14,7 @@ public class Customer {
   private Timestamp orderTime;
   private int id;
 
+
   public Customer(String customerName, String customerPhone, String customerAddress){
     this.customerName = customerName;
     this.customerPhone = customerPhone;
