@@ -5,7 +5,6 @@ import java.sql.Timestamp;
 import java.util.Date;
 import java.text.DateFormat;
 
-
 public class CustomerTest {
   private Customer testCustomer;
   private Customer firstCustomer;
@@ -53,7 +52,7 @@ public class CustomerTest {
   @Test
   public void all_returnsAllInstancesOfCustomer_true() {
     assertEquals(true, Customer.all().get(0).equals(testCustomer));
-    assertEquals(true, Customer.all().get(1).equals(secondCustomer));
+    assertEquals(true, Customer.all().get(2).equals(secondCustomer));
   }
 
   @Test
@@ -66,13 +65,11 @@ public class CustomerTest {
     public void find_returnsCustomerWithSameId_secondCustomer() {
       assertEquals(Customer.find(secondCustomer.getId()), secondCustomer);
   }
-    // @Test
-    // public void saveOrderTime_recordsOrderTimeOfCreationInDatabase() {
-    //    Customer testCustomer = customer;
-    //  testCustomer.save();
-    //  Timestamp savedCustomerOrderTime = Customer.find(testCustomer.getId()).getOrderTime();
-    //  Timestamp rightNow = new Timestamp(new Date().getTime());
-    //  assertEquals(rightNow.getDay(), savedCustomerOrderTime.getDay());
-    // }
+    @Test
+    public void saveOrderTime_recordsOrderTimeOfCreationInDatabase() {
+     Timestamp savedCustomerOrderTime = Customer.find(testCustomer.getId()).getOrderTime();
+     Timestamp rightNow = new Timestamp(new Date().getTime());
+     assertEquals(rightNow.getDay(), savedCustomerOrderTime.getDay());
+    }
 
 }
