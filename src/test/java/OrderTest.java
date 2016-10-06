@@ -70,11 +70,11 @@ public class OrderTest {
     assertEquals(testOrder.getId(), savedOrder.getId());
   }
 
-  @Test
-  public void find_returnsOrderWithCorrectId_True() {
-    Order savedOrder = Order.all().get(0);
-    assertEquals(testOrder.getId(), savedOrder.getId());
-  }
+  // @Test
+  // public void find_returnsOrderWithCorrectId_True() {
+  //   int id = testOrder.getId();
+  //   assertTrue(testOrder.equals(Order.find(id)));
+  // }
 
   @Test
   public void delete_deletesOrders_true(){
@@ -82,6 +82,11 @@ public class OrderTest {
     firstOrder.delete();
     secondOrder.delete();
     assertEquals(null, Order.find(testOrder.getId()));
+  }
+
+  @Test
+  public void saveFinalOrder_addsOrderToFinalOrders_true(){
+    
   }
 
   // @Test

@@ -78,6 +78,15 @@ public class MenuItem {
     }
   }
 
+  public static List<MenuItem> findByRestaurant(int restaurantId) {
+    String sql = "SELECT * FROM menuitems where restaurantid = :restaurantId;";
+    try(Connection con = DB.sql2o.open()) {
+      return con.createQuery(sql)
+      .throwOnMappingFailure(false)
+      .executeAndFetch(MenuItem.class);
+    }
+  }
+  
   public void delete() {
       try(Connection con = DB.sql2o.open()) {
         String sql = "delete from menuitems where id = :id;";
