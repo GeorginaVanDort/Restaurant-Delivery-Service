@@ -61,12 +61,4 @@ public class MenuItemTest {
      firstMenuItem.delete();
      assertEquals(null, Restaurant.find(firstMenuItem.getId()));
    }
-
-
-
-
-
-
-
-
 }

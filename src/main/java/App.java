@@ -1,16 +1,16 @@
-import java.util.Map;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.HashMap;
-import spark.ModelAndView;
-import java.sql.Timestamp;
-import spark.template.velocity.VelocityTemplateEngine;
-import static spark.Spark.*;
-
-public class App {
-  public static void main(String[] args) {
-    staticFileLocation("/public");
-    String layout = "templates/layout.vtl";
+// import java.util.Map;
+// import java.util.ArrayList;
+// import java.util.List;
+// import java.util.HashMap;
+// import spark.ModelAndView;
+// import java.sql.Timestamp;
+// import spark.template.velocity.VelocityTemplateEngine;
+// import static spark.Spark.*;
+//
+// public class App {
+//   public static void main(String[] args) {
+//     staticFileLocation("/public");
+//     String layout = "templates/layout.vtl";
 //
 //     get("/", (request, response) -> {
 //       Map<String, Object> model = new HashMap<String, Object>();
@@ -24,9 +24,9 @@ public class App {
 //       return new ModelAndView(model, layout);
 //     }, new VelocityTemplateEngine());
 //
-//     get("/orderform", (request, response) -> {
+//     get("/happypanda", (request, response) -> {
 //       Map<String, Object> model = new HashMap<String, Object>();
-//       Restaurant newRestaurant = new Restaurant("happyHouse", "Chinese", "Late Night", "ChinaTown", "$$");
+//       Restaurant newRestaurant = Restaurant.all().getId(1);
 //       newRestaurant.save();
 //       // MenuItem restaurantMenu = new MenuItem.find(MenuItem.all().getId())
 //       model.put("restaurant", newRestaurant);
@@ -35,5 +35,3 @@ public class App {
 //       return new ModelAndView(model, layout);
 //     }, new VelocityTemplateEngine());
 //
-   }
-}
