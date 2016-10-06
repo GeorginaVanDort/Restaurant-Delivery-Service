@@ -116,7 +116,7 @@ public class RestaurantTest {
   // @Test
   // public void delete_deletesRestaurants_true(){
   //   testRestaurant.delete();
-  //   firstRestaurant.delete();
+  //   firstRestaurant.delete(); 
   //   secondRestaurant.delete();
   //   assertEquals(null, Restaurant.find(testRestaurant.getResId()));
   // }
