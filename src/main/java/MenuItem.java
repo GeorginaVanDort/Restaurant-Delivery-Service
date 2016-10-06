@@ -7,18 +7,15 @@ import java.math.*;
 
 public class MenuItem {
   private int id;
-  private String itemName;
   private int restaurantId;
   private double price;
+  private String itemName;
 
-  public MenuItem(String itemName, int restaurantId, double price){
-    this.itemName = itemName;
+  public MenuItem(int restaurantId, double price, String itemName, int id){
     this.restaurantId = restaurantId;
     this.price = price;
-  }
-
-  public String getItemName(){
-    return itemName;
+    this.itemName = itemName;
+    this.id = id;
   }
 
   public int getRestaurantId(){
@@ -27,6 +24,10 @@ public class MenuItem {
 
   public double getPrice(){
     return price;
+  }
+
+  public String getItemName(){
+    return itemName;
   }
 
   public int getId(){
@@ -39,17 +40,20 @@ public class MenuItem {
       return false;
     } else {
       MenuItem newMenuItem = (MenuItem) otherMenuItem;
-      return this.getItemName().equals(newMenuItem.getItemName()) && this.getRestaurantId() == (newMenuItem.getRestaurantId());
+      return this.getItemName().equals(newMenuItem.getItemName()) && this.getRestaurantId() == (newMenuItem.getRestaurantId()) &&
+      this.getPrice() == (newMenuItem.getPrice()) &&
+      this.getId() == (newMenuItem.getId());
     }
   }
 
   public void save() {
     try(Connection con = DB.sql2o.open()) {
-      String sql = "INSERT INTO menuitems (itemName, restaurantId, price) VALUES (:itemName, :restaurantId, :price)";
+      String sql = "INSERT INTO menuitems (restaurantId, price, itemName, id) VALUES (:restaurantId, :price, :itemName, :id)";
       this.id = (int) con.createQuery(sql, true)
-        .addParameter("itemName", this.itemName)
         .addParameter("restaurantId", this.restaurantId)
         .addParameter("price", this.price)
+        .addParameter("itemName", this.itemName)
+        .addParameter("id", this.id)
         .executeUpdate()
         .getKey();
     }
@@ -73,6 +77,26 @@ public class MenuItem {
         return menuItem;
     }
   }
+
+  public static List<MenuItem> findByRestaurant(int restaurantId) {
+    try(Connection con = DB.sql2o.open()) {
+      String sql = "SELECT * FROM menuitems where restaurantId = :restaurantId";
+      List<MenuItem> menuItem = con.createQuery(sql)
+        .addParameter("restaurantId", restaurantId)
+        .executeAndFetch(MenuItem.class);
+        return menuItem;
+    }
+  }
+
+
+  // public static List<MenuItem> findByRestaurant(int restaurantId) {
+  //   String sql = "SELECT * FROM menuitems where restaurantid = :restaurantId;";
+  //   try(Connection con = DB.sql2o.open()) {
+  //     return con.createQuery(sql)
+  //     .throwOnMappingFailure(false)
+  //     .executeAndFetch(MenuItem.class);
+  //   }
+  // }
 
   public void delete() {
       try(Connection con = DB.sql2o.open()) {
