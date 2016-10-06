@@ -24,9 +24,9 @@ public class App {
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
-    get("/orderform", (request, response) -> {
+    get("/happypanda", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
-      Restaurant newRestaurant = new Restaurant("happyHouse", "Chinese", "Late Night", "ChinaTown", "$$");
+      Restaurant newRestaurant = Restaurant.all().getId(1);
       newRestaurant.save();
       // MenuItem restaurantMenu = new MenuItem.find(MenuItem.all().getId())
       model.put("restaurant", newRestaurant);
