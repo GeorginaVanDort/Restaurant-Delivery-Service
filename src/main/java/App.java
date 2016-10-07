@@ -63,7 +63,7 @@ public class App {
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
-    post("/new-order", (request, response) -> {
+    post("/CasaLola", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
       String name = request.queryParams("name");
       String phone = request.queryParams("phone");
@@ -72,7 +72,7 @@ public class App {
       Customer newCustomer = new Customer(name, phone, address);
       newCustomer.save();
       model.put("Customer", newCustomer);
-      model.put("template", "templates/Orderforms.vtl");
+      model.put("template", "templates/CasaLola.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
 
