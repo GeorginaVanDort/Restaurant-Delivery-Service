@@ -10,7 +10,7 @@ by
 ## Description
 Local food delivery service.
 
-![screenshot of project running](screenshot.png)
+![screenshot of project running](screenshot.jpg)
 
 
 ### Specifications
