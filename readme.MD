@@ -43,4 +43,4 @@ Java, JUnit, Spark, PostgreSQL, Gradle
 ## Legal
 *Licensed under the GNU General Public License v3.0*
 
-Copyright (c) 2016 Copyright _Vanessa Palacios Sharma_ All Rights Reserved.
+Copyright (c) 2016 Copyright _Vanessa Palacios Sharma_  _Shelby Clayton_ _Nhat Hoang_ _Georgina Van Dort_ All Rights Reserved.

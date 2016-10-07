@@ -14,7 +14,6 @@ public class App {
 
     get("/", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
-
       model.put("template", "templates/index.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
@@ -58,8 +57,21 @@ public class App {
     get("/orderform", (request, response) -> {
       Map<String, Object> model = new HashMap<String, Object>();
       List<MenuItem> restaurantMenu = MenuItem.findByRestaurant(2);
-      model.put("restaurant", restaurantMenu);
-      model.put("menuitems", MenuItem.all());
+      model.put("menuitems", restaurantMenu);
+      // model.put("menuitems", MenuItem.all());
+      model.put("template", "templates/Orderforms.vtl");
+      return new ModelAndView(model, layout);
+    }, new VelocityTemplateEngine());
+
+    post("/new-order", (request, response) -> {
+      Map<String, Object> model = new HashMap<String, Object>();
+      String name = request.queryParams("name");
+      String phone = request.queryParams("phone");
+      String address = request.queryParams("address");
+      // int restaurantid = Integer.parseInt(request.queryParams("restaurantid"));
+      Customer newCustomer = new Customer(name, phone, address);
+      newCustomer.save();
+      model.put("Customer", newCustomer);
       model.put("template", "templates/Orderforms.vtl");
       return new ModelAndView(model, layout);
     }, new VelocityTemplateEngine());
