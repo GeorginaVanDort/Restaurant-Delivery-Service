@@ -10,7 +10,6 @@ public class Restaurant {
   public String address;
   public String price;
   public int restaurantid;
-  public int id;
 
   public Restaurant (String name, String cuisine, String hours, String address, String price, int restaurantid) {
     this.name = name;
@@ -44,9 +43,7 @@ public class Restaurant {
   public int getResId() {
     return restaurantid;
   }
-  public int getId(){
-    return id;
-  }
+
 
   @Override
   public boolean equals(Object otherRestaurant) {
@@ -82,45 +79,22 @@ public class Restaurant {
     }
   }
 
-  // public static List<Restaurant> allRes(){
-  //   String sql = "SELECT * FROM restaurants Where id = :restaurantid;"
-  //   try(Connection con = DB.sql2o.open()) {
-  //     return con.createQuery(sql)
-  //     .throwOnMappingFailure(false)
-  //     .executeAndFetch(Restaurant.class);
-  //   }
-  // }
-
   public static Restaurant find(int id) {
     try(Connection con = DB.sql2o.open()) {
-      String sql = "SELECT * FROM restaurants where id=:resid";
+      String sql = "SELECT * FROM restaurants where id=:id";
       Restaurant restaurant = con.createQuery(sql)
-        .addParameter("resid", id)
+        .addParameter("id", id)
         .executeAndFetchFirst(Restaurant.class);
         return restaurant;
     }
   }
 
-  // public void delete() {
-  //     try(Connection con = DB.sql2o.open()) {
-  //       String sql = "delete from restaurants where id = :id;";
-  //       con.createQuery(sql)
-  //         .addParameter("id", this.id)
-  //         .executeUpdate();
-  //     }
-  //   }
-
-  // public void update(String name, String cuisine, String hours, String address, String price) {
-  //   try (Connection con = DB.sql2o.open()){
-  //     String sql = "update restaurants set name = :name, cuisine = :cuisine, hours = :hours, address = :address, price = :price where id=:id";
-  //     con.createQuery(sql)
-  //     .addParameter("name", name)
-  //     .addParameter("cuisine", cuisine)
-  //     .addParameter("hours", hours)
-  //     .addParameter("address", address)
-  //     .addParameter("price", price)
-  //     .addParameter("id", id)
-  //     .executeUpdate();
-  //   }
-  // }
+  public void delete() {
+      try(Connection con = DB.sql2o.open()) {
+        String sql = "delete from restaurants where id=:restaurantid;";
+        con.createQuery(sql)
+          .addParameter("restaurantid", this.restaurantid)
+          .executeUpdate();
+      }
+    }
 }

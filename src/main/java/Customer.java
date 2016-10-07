@@ -64,9 +64,9 @@ public class Customer {
   try(Connection con = DB.sql2o.open()) {
     String sql = "INSERT INTO customerdetails (customername, customerphone, customeraddress, ordertime) VALUES (:customerName, :customerPhone, :customerAddress, now())";
     this.id = (int) con.createQuery(sql, true)
-      .addParameter("customerName", this.customerName)
-      .addParameter("customerPhone", this.customerPhone)
-      .addParameter("customerAddress", this.customerAddress)
+      .addParameter("customerName", this.getCustomerName())
+      .addParameter("customerPhone", this.getCustomerPhone())
+      .addParameter("customerAddress", this.getCustomerAddress())
       .throwOnMappingFailure(false)
       .executeUpdate()
       .getKey();
