@@ -45,7 +45,7 @@ insert into menuitems (restaurantid, price, itemname, id) VALUES
 (3, 5.00, 'MeatBall', 5),
 (3, 5.00, 'Bbq Beef', 6),
 (3, 5.00, 'Hawaiian', 7),
-(3, 5.00, 'Reugen', 8),
+(3, 5.00, 'Reuben', 8),
 (3, 5.00, 'Seafood', 9),
 
 (4, 6.00, 'Korean Bbq', 1),
